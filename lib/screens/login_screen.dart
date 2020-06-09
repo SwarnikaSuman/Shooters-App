@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 String emailuser = '';
@@ -30,11 +31,9 @@ class _SignInState extends State<SignIn> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 70.0),
+            margin: EdgeInsets.only(top: 70.0, left: 25.0),
             height: 150,
-            child: Center(
-              child: Icon(Icons.account_circle)
-            ),
+            child: Image.asset('assets/logo.png'),
           ),
           Container(
             width: MediaQuery.of(context).size.width,
@@ -133,6 +132,19 @@ class _SignInState extends State<SignIn> {
                             ),
                           ),
                         ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: Container(
+                      height: 50.0,
+                      child: SignInButton(
+                        Buttons.Google,
+                        text: "Login with google",
+                        onPressed: () {},
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0)),
                       ),
                     ),
                   ),
