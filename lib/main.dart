@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import './screens/login_screen.dart';
+import 'package:shooting_app/Screens/login/login_screen.dart';
+import 'package:shooting_app/Screens/splash/splash_screen.dart';
 
-void main() => runApp(SignIn());
 
-/*class MyApp extends StatelessWidget {
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,4 +17,4 @@ void main() => runApp(SignIn());
       home: SignIn(),
     );
   }
-}*/
+}

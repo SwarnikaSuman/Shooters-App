@@ -5,10 +5,14 @@ class TokenPlayground{
   bool updated=false;
 
   /// JWT Functions
-  void updateJWT() {
+  Future<Null> updateJWT() {
     FlutterSecureStorage().read(key: "JWT").
     then((onValue) {
-      _JWT=onValue;
+      if (onValue!=null){
+        _JWT=onValue;
+      }else{
+        _JWT="";
+      }
       updated=true;
     }).catchError((onError){
       updateJWT();

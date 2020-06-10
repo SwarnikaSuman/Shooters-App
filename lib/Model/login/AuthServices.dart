@@ -7,7 +7,7 @@ import 'package:shooting_app/Model/base/CustomNetworkCliet.dart';
 
 
 class AuthServices{
-  final CustomNetworkClient _customNetworkClient =CustomNetworkClient();
+  final CustomNetworkClient _customNetworkClient = CustomNetworkClient();
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: ['email']
   );

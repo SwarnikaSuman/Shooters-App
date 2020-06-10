@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -18,7 +20,9 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: new Builder(builder: (BuildContext context) {
-      // had to use builder to display snackbar
+      final width=MediaQuery.of(context).size.width;
+      final height=MediaQuery.of(context).size.height;
+      final top= MediaQuery.of(context).padding.top;
       return Stack(
         children: <Widget>[
           Container(
@@ -31,13 +35,13 @@ class _SignInState extends State<SignIn> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 70.0, left: 25.0),
-            height: 150,
-            child: Image.asset('assets/logo.png'),
+            margin: EdgeInsets.only(top: top+0.05*height),
+            height:0.2*height,
+            child: Center(child: Image.asset('assets/logo.png')),
           ),
           Container(
-            width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.only(top: 260),
+            width:width,
+            margin: EdgeInsets.only(top: top+ 0.3*height),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20), topRight: Radius.circular(20)),
@@ -104,32 +108,24 @@ class _SignInState extends State<SignIn> {
                   Padding(
                     padding: EdgeInsets.only(top: 20),
                     child: Container(
+                      width: width,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Color(0xff40dedf), Color(0xff448aff)],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                          ),
+                          borderRadius: BorderRadius.circular(18.0)),
                       height: 50.0,
-                      child: RaisedButton(
-                        onPressed: () {},
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0)),
-                        padding: EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Color(0xff40dedf), Color(0xff448aff)],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                              ),
-                              borderRadius: BorderRadius.circular(18.0)),
-                          child: Container(
-                            constraints: BoxConstraints(
-                                maxWidth: MediaQuery.of(context).size.width,
-                                minHeight: 50.0),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Login",
-                              style: GoogleFonts.openSans(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600),
-                            ),
+                      child: FlatButton(
+                      onPressed: () {},
+                        child: Center(
+                          child: Text(
+                            "Login",
+                            style: GoogleFonts.openSans(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                       ),
@@ -137,15 +133,29 @@ class _SignInState extends State<SignIn> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 20),
-                    child: Container(
-                      height: 50.0,
-                      child: SignInButton(
-                        Buttons.Google,
-                        text: "Login with google",
-                        onPressed: () {},
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0)),
-                      ),
+                    child:Container(
+                      width:width,
+                      decoration: BoxDecoration(
+                          color:Colors.white,
+                          border:Border.all(color:Color.fromARGB(255, 150, 150, 150)),
+                          borderRadius: BorderRadius.circular(18.0)),
+                      height: 50.0, child: FlatButton(
+                      onPressed: () {},
+                        child: Expanded(child:Stack(children: [
+                          Positioned(
+                            child: Image.asset('assets/google.png'),
+                            left: 10,
+                            height: 50,
+                          ),
+                          Center(
+                                child: Text("Login Using Google",
+                                    style: GoogleFonts.openSans(
+                                      fontSize: 18,
+                                      color: Colors.black,
+                                    )),
+                              )
+                        ]),
+                      ),)
                     ),
                   ),
                   Padding(
