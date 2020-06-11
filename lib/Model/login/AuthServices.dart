@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shooting_app/Model/base/AuthFunctions.dart';
 import 'package:shooting_app/Model/base/ExceptionClasses.dart';
 import 'package:http/http.dart';
 import 'package:shooting_app/Model/base/CustomNetworkCliet.dart';
@@ -8,6 +9,7 @@ import 'package:shooting_app/Model/base/CustomNetworkCliet.dart';
 
 class AuthServices{
   final CustomNetworkClient _customNetworkClient = CustomNetworkClient();
+  final AuthFunction _authFunction = AuthFunction();
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: ['email']
   );
@@ -18,9 +20,9 @@ class AuthServices{
     Response response = await _customNetworkClient.POST('/users/login', jsonEncode(body));
     if(response.statusCode==200){
         Map<String, String> loginObject = jsonDecode(response.body);
-        bool storeStatus = await _customNetworkClient.storeToken(loginObject['jwttoken']);
+        bool storeStatus = await _authFunction.storeToken(loginObject['jwttoken']);
         if(!storeStatus){
-          storeStatus = await _customNetworkClient.storeToken(loginObject['jwttoken']);
+          storeStatus = await _authFunction.storeToken(loginObject['jwttoken']);
           if(!storeStatus){
             throw WriteException();
           }

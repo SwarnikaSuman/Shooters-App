@@ -6,11 +6,11 @@ import 'dart:io';
 
 class CustomNetworkClient  {
   final String _urlString= URL;
-  final TokenPlayground _tokenPlayground = TokenPlayground();
+
 
   Future<Null> _updateToken() async{
-    if(!_tokenPlayground.updated){
-      await _tokenPlayground.updateJWT();
+    if(!TokenPlayground.updated){
+      await TokenPlayground.updateJWT();
     }
   }
 
@@ -18,7 +18,7 @@ class CustomNetworkClient  {
     await _updateToken();
     await get("$_urlString$url", headers: {
       'Content-Type': 'application/json',
-      HttpHeaders.authorizationHeader: _tokenPlayground.readJWT()
+      HttpHeaders.authorizationHeader: TokenPlayground.readJWT()
     });}
 
 
@@ -27,16 +27,12 @@ class CustomNetworkClient  {
     await post("$_urlString$url",
       headers: {
       'Content-Type': 'application/json',
-      HttpHeaders.authorizationHeader: _tokenPlayground.readJWT()
+      HttpHeaders.authorizationHeader: TokenPlayground.readJWT()
       },
       body: body
     );}
 
-  bool isLoggedIn()=> _tokenPlayground.readJWT()!="";
 
-  Future<bool> storeToken(String JWT) => _tokenPlayground.storeJWT(JWT);
-
-  Future<bool> deleteToken() => _tokenPlayground.deleteJWT();
 
   /// Singleton Pattern
   CustomNetworkClient._internal();
@@ -47,8 +43,8 @@ class CustomNetworkClient  {
   /// Returns CustomNetworkClient asynchronously
   /// Ensures that JWT is updated
   static Future<CustomNetworkClient> getInstance() async{
-    if(!_instance._tokenPlayground.updated){
-      await _instance._tokenPlayground.updateJWT();
+    if(!TokenPlayground.updated){
+      await TokenPlayground.updateJWT();
     }
     return _instance;
   }
