@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shooting_app/Screens/login/register_type.dart';
 
 String emailuser = '';
 String passuser = '';
@@ -16,33 +17,34 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: new Builder(builder: (BuildContext context) {
-      final width=MediaQuery.of(context).size.width;
-      final height=MediaQuery.of(context).size.height;
-      final top= MediaQuery.of(context).padding.top;
-      return Stack(
+    final width=MediaQuery.of(context).size.width;
+    final height=MediaQuery.of(context).size.height;
+    final top= MediaQuery.of(context).padding.top;
+
+    return Scaffold(body:
+      Stack(
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xff448aff), Color(0xfff48fb1)],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
+                gradient: LinearGradient(
+                  colors: [ Color(0xff2B32B2),Color(0xff1488CC),],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                )
             ),
           ),
           Container(
             margin: EdgeInsets.only(top: top+0.05*height),
             height:0.2*height,
-            child: Center(child: Image.asset('assets/logo.png')),
+           // child: Center(child: Image.asset('assets/logo.png')),
           ),
           Container(
             width:width,
             margin: EdgeInsets.only(top: top+ 0.3*height),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
+            borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-              color: Colors.white,
+              color:Colors.white
             ),
             child: Padding(
               padding: EdgeInsets.all(15),
@@ -74,7 +76,7 @@ class _SignInState extends State<SignIn> {
                             ),
                             borderRadius: BorderRadius.circular(18),
                           ),
-                          labelText: 'email',
+                          labelText: 'Email',
                           prefixIcon: Icon(Icons.person_outline),
                           labelStyle: GoogleFonts.openSans(fontSize: 15)),
                     ),
@@ -116,6 +118,7 @@ class _SignInState extends State<SignIn> {
                       height: 50.0,
                       child: FlatButton(
                       onPressed: () {},
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(18))),
                         child: Center(
                           child: Text(
                             "Login",
@@ -138,21 +141,19 @@ class _SignInState extends State<SignIn> {
                           borderRadius: BorderRadius.circular(18.0)),
                       height: 50.0, child: FlatButton(
                       onPressed: () {},
-                        child: Expanded(child:Stack(children: [
-                          Positioned(
-                            child: Image.asset('assets/google.png'),
-                            left: 10,
-                            height: 50,
-                          ),
-                          Center(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(18))),
+                        child: Row(children:[Flexible(flex:3, child:
+                          Align(
+                            child:Padding(padding:EdgeInsets.all(10),child:Image.asset('assets/google.png')),
+                            alignment: Alignment.centerRight
+                    )),
+                          Flexible(flex:7,
                                 child: Text("Login Using Google",
                                     style: GoogleFonts.openSans(
                                       fontSize: 18,
                                       color: Colors.black,
-                                    )),
-                              )
-                        ]),
-                      ),)
+                                    )))
+                      ]),)
                     ),
                   ),
                   Padding(
@@ -182,9 +183,9 @@ class _SignInState extends State<SignIn> {
                               )),
                           TextSpan(
                               text: "Sign Up",
-                              recognizer: TapGestureRecognizer()..onTap = () {},
+                              recognizer: TapGestureRecognizer()..onTap = () {Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisterType()));},
                               style: GoogleFonts.openSans(
-                                color: Color(0xff0fb2ea),
+                                color: Color(0xff2b9bea),
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
                               ))
@@ -197,7 +198,7 @@ class _SignInState extends State<SignIn> {
             ),
           )
         ],
-      );
-    }));
+      )
+    );
   }
 }

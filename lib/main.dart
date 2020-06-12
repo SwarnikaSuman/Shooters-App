@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shooting_app/Screens/login/login_screen.dart';
+import 'package:shooting_app/Screens/login/register_type.dart';
 import 'package:shooting_app/Screens/splash/splash_screen.dart';
 
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.cyan,
       ),
-      home: SignIn(),
+      home:SignIn(),
     );
   }
 }
