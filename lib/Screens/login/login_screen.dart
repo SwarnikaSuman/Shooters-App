@@ -43,7 +43,7 @@ class _SignInState extends State<SignIn> {
             margin: EdgeInsets.only(top: top + 0.05 * height),
             height: 0.2 * height,
             // child: Center(child: Image.asset('assets/logo.png')),
-          ),
+          ), 
           Container(
             width: width,
             margin: EdgeInsets.only(top: top + 0.3 * height),

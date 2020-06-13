@@ -3,7 +3,31 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shooting_app/Screens/values/Strings.dart';
 
-class RegisterType extends StatelessWidget {
+class RegisterType extends StatefulWidget {
+ 
+  @override
+  _RegisterTypeState createState() => _RegisterTypeState();
+}
+
+class _RegisterTypeState extends State<RegisterType> {
+  String _type;
+  int _radioValue;
+   void _handleRadioValueChange(int value) {
+    setState(() {
+      _radioValue = value;
+      switch (_radioValue) {
+        case 0:
+          _type = 'student';
+          break;
+        case 1:
+          _type = 'coach';
+          break;
+        case 2:
+          _type = 'institute';
+          break;
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     final top = MediaQuery.of(context).padding.top;
@@ -17,9 +41,9 @@ class RegisterType extends StatelessWidget {
               Row(children: [
                 Radio(
                   value: 1,
-                  groupValue: 1,
+                  groupValue: _radioValue,
                   activeColor: Color(0Xff2b9bea),
-                  onChanged: (value) {},
+                  onChanged: _handleRadioValueChange,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 10),
@@ -38,9 +62,9 @@ class RegisterType extends StatelessWidget {
               Row(children: [
                 Radio(
                   value: 2,
-                  groupValue: 1,
+                  groupValue: _radioValue,
                   activeColor: Color(0Xff2b9bea),
-                  onChanged: (value) {},
+                  onChanged: _handleRadioValueChange,
                 ),
                 Padding(
                     padding: EdgeInsets.only(left: 10),
@@ -62,9 +86,9 @@ class RegisterType extends StatelessWidget {
               Row(children: [
                 Radio(
                   value: 3,
-                  groupValue: 1,
+                  groupValue: _radioValue,
                   activeColor: Color(0Xff2b9bea),
-                  onChanged: (value) {},
+                  onChanged: _handleRadioValueChange,
                 ),
                 Padding(
                     padding: EdgeInsets.only(left: 10),
