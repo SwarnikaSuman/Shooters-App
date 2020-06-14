@@ -15,9 +15,9 @@ class AuthServices{
   );
   /// Throws WriteException if unable to save the JWT
   /// Throws HttpException if respone code is other than 200
-  Future<Null> login(@required String email, @required String password) async{
+  Future<Null> login({@required String email, @required String password}) async{
     Map<String, String> body = {'userEmail' : email, 'userPassword' : password};
-    Response response = await _customNetworkClient.POST('/users/login', jsonEncode(body));
+    Response response = await _customNetworkClient.POST(url: '/users/login', body: jsonEncode(body));
     if(response.statusCode==200){
         Map<String, String> loginObject = jsonDecode(response.body);
         bool storeStatus = await _authFunction.storeToken(loginObject['jwttoken']);
@@ -35,14 +35,14 @@ class AuthServices{
   /// Returns true if user registers successfully
   /// Returns false if user email is already registered
   /// Throws HttpException if response code is other than 200
-  Future<bool> register(
+  Future<bool> register({
       @required String firstName,
       @required String middleName,
       @required String lastName,
       @required String userEmail,
       @required String userPassword,
       @required String userMobnum,
-      @required String userType) async{
+      @required String userType}) async{
 
     Map<String, String> body = {
       'firstName' : firstName,
@@ -53,12 +53,12 @@ class AuthServices{
       'userMobnum' : userMobnum,
       'userType' : userType
     };
-    Response response = await _customNetworkClient.POST('/users/register', jsonEncode(body));
+    Response response = await _customNetworkClient.POST(url: '/users/register', body: jsonEncode(body));
     if(response.statusCode==200){
       Map<String, String> registerObject = jsonDecode(response.body);
         if(registerObject['message']=="success"){
           return true;
-        };
+        }
       return false;
     } else {
       throw HttpException(response.statusCode);

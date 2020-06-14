@@ -14,7 +14,7 @@ class CustomNetworkClient  {
     }
   }
 
-  Future<Response> GET(@required String url) async{
+  Future<Response> GET({@required String url}) async{
     await _updateToken();
     await get("$_urlString$url", headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ class CustomNetworkClient  {
     });}
 
 
-  Future<Response> POST(@required String url, @required String body) async{
+  Future<Response> POST({@required String url, @required String body}) async{
     await _updateToken();
     await post("$_urlString$url",
       headers: {
