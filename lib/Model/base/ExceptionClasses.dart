@@ -14,3 +14,7 @@ class HttpException implements Exception {
   int errorCode;
   HttpException(this.errorCode);
 }
+
+class InvalidCredentials implements Exception{
+  String cause="Email does not exits";
+}

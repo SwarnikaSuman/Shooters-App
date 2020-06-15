@@ -16,16 +16,21 @@ class AuthServices{
   /// Throws WriteException if unable to save the JWT
   /// Throws HttpException if respone code is other than 200
   Future<Null> login({@required String email, @required String password}) async{
-    Map<String, String> body = {'userEmail' : email, 'userPassword' : password};
+    Map<String, dynamic> body = {'userEmail' : email, 'userPassword' : password};
     Response response = await _customNetworkClient.POST(url: '/users/login', body: jsonEncode(body));
     if(response.statusCode==200){
-        Map<String, String> loginObject = jsonDecode(response.body);
-        bool storeStatus = await _authFunction.storeToken(loginObject['jwttoken']);
-        if(!storeStatus){
-          storeStatus = await _authFunction.storeToken(loginObject['jwttoken']);
+
+        Map<String, dynamic> loginObject = jsonDecode(response.body);
+        if(loginObject.containsKey('jwttoken')){
+          bool storeStatus = await _authFunction.storeToken(loginObject['jwttoken']);
           if(!storeStatus){
-            throw WriteException();
+            storeStatus = await _authFunction.storeToken(loginObject['jwttoken']);
+            if(!storeStatus){
+              throw WriteException();
+            }
           }
+        }else{
+          throw InvalidCredentials();
         }
       } else {
         throw HttpException(response.statusCode);
