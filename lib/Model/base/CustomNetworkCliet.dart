@@ -16,7 +16,7 @@ class CustomNetworkClient  {
 
   Future<Response> GET({@required String url}) async{
     await _updateToken();
-    await get("$_urlString$url", headers: {
+    return await get("$_urlString$url", headers: {
       'Content-Type': 'application/json',
       HttpHeaders.authorizationHeader: TokenPlayground.readJWT()
     });}
@@ -24,7 +24,7 @@ class CustomNetworkClient  {
 
   Future<Response> POST({@required String url, @required String body}) async{
     await _updateToken();
-    await post("$_urlString$url",
+    return await post("$_urlString$url",
       headers: {
       'Content-Type': 'application/json',
       HttpHeaders.authorizationHeader: TokenPlayground.readJWT()

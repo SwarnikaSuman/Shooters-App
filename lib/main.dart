@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:shooting_app/Screens/login/login_screen.dart';
-import 'package:shooting_app/screens/homepage/homepage.dart';
-import 'package:shooting_app/screens/login/register_type.dart';
+import 'package:provider/provider.dart';
+import 'package:shooting_app/Screens/login/login_screen/login_controller.dart';
+import 'package:shooting_app/Screens/login/login_screen/login_screen.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ChangeNotifierProvider(create:(context)=>LoginNotifier() , child:MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Shooting App',
-      // routes: {
-      //   '/login': (_) => HomePage(),
-      //   '/register': (_) => RegisterType(),
-      // },
       theme: ThemeData(
         primarySwatch: Colors.cyan,
       ),
       home: SignIn(),
-    );
+    ));
   }
 }

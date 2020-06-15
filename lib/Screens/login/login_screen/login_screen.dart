@@ -1,23 +1,19 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shooting_app/Screens/login/register_type.dart';
-import 'package:shooting_app/Model/login/AuthServices.dart';
-import 'package:shooting_app/screens/homepage/homepage.dart';
+import 'package:provider/provider.dart';
+import 'package:shooting_app/Screens/login/login_screen/login_controller.dart';
+import 'package:shooting_app/Screens/login/register_type/register_type.dart';
 
-String emailuser = '';
-String passuser = '';
 
-class SignIn extends StatefulWidget {
-  @override
-  _SignInState createState() => _SignInState();
-}
 
-class _SignInState extends State<SignIn> {
-  AuthServices _authServices = AuthServices();
-  bool isLoading = false;
-  final email = TextEditingController();
-  final password = TextEditingController();
+
+
+class SignIn extends StatelessWidget {
+
+  String emailuser = '';
+  String passuser = '';
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +21,7 @@ class _SignInState extends State<SignIn> {
     final height = MediaQuery.of(context).size.height;
     final top = MediaQuery.of(context).padding.top;
 
-    return Scaffold(body: new Builder(builder: (BuildContext context) {
+    return Scaffold(body: Builder(builder: (BuildContext context) {
       return Stack(
         children: <Widget>[
           Container(
@@ -57,20 +53,23 @@ class _SignInState extends State<SignIn> {
               child: ListView(
                 padding: EdgeInsets.only(top: 5),
                 children: <Widget>[
-                  Text(
+                  Stack(children:[Text(
                     "Login",
                     style: GoogleFonts.openSans(
                         fontSize: 30, fontWeight: FontWeight.w600),
-                  ),
+                  ), Consumer<LoginNotifier>(
+                    builder:(context, notif, child)=>
+                      notif.isLoading ? Center(child: CircularProgressIndicator()): child,
+                      child:Container()
+                  )]), //isLoading ?  Center(child: CircularProgressIndicator()) : Container()]),
                   Padding(
                     padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
                     child: TextFormField(
                       style: GoogleFonts.openSans(
                         color: Colors.black,
                       ),
-                      controller: email,
                       onChanged: (_) {
-                        emailuser = email.text;
+                        emailuser = _;
                         print(emailuser);
                       },
                       decoration: InputDecoration(
@@ -92,10 +91,8 @@ class _SignInState extends State<SignIn> {
                     style: GoogleFonts.openSans(
                       color: Colors.black,
                     ),
-                    controller: password,
                     onChanged: (_) {
-                      passuser = password.text;
-                      print(passuser);
+                      passuser = _;
                     },
                     decoration: InputDecoration(
                         fillColor: Color(0xfff5f5f5),
@@ -123,30 +120,15 @@ class _SignInState extends State<SignIn> {
                           borderRadius: BorderRadius.circular(18.0)),
                       height: 50.0,
                       child: FlatButton(
-                        onPressed: () {
-                          setState(() {
-                            isLoading = true;
-                          });
-                          _authServices
-                              .login(email: emailuser, password: passuser)
-                              .then((value) {
-                            setState(() {
-                              isLoading = false;
-                            });
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomePage()));
-                          }).catchError((e) {
-                            setState(() {
-                              isLoading = false;
-                            });
-                            final snackBar = SnackBar(
-                              content: Text('Login failed'),
-                            );
-                            Scaffold.of(context).showSnackBar(snackBar);
-                          });
-                        },
+                        onPressed: () async {
+                          if(emailuser.isEmpty || passuser.isEmpty){
+                            Scaffold.of(context).showSnackBar(SnackBar(content: Text("Enter Credentials")));
+                          }else{
+                          String error = await Provider.of<LoginNotifier>(context, listen: false).login(email: emailuser, password: passuser);
+                          if(error!=""){
+                            Scaffold.of(context).showSnackBar(SnackBar(content: Text(error),));
+                          }}
+                          },
                         shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(18))),
@@ -244,9 +226,7 @@ class _SignInState extends State<SignIn> {
               ),
             ),
           ),
-          isLoading ? Center(child: CircularProgressIndicator()) : Container(),
         ],
-      );
-    }));
+      ); }));
   }
 }
