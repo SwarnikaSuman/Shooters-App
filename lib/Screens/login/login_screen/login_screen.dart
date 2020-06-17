@@ -6,9 +6,6 @@ import 'package:shooting_app/Screens/login/login_screen/login_controller.dart';
 import 'package:shooting_app/Screens/login/register_type/register_type.dart';
 
 
-
-
-
 class SignIn extends StatelessWidget {
 
   String emailuser = '';
