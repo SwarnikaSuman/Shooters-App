@@ -23,7 +23,7 @@ class RegisterType extends StatelessWidget{
                 padding: EdgeInsets.only(top: 100 + top, bottom: 80),
                 child: ListView(
                   children: <Widget>[
-                    Column(children: [
+                    FlatButton(onPressed:(){registerController.changeUserType(1);},child:Column(children: [
                       Row(children: [
                         Consumer<RegisterController>(
                             builder: (_, regist, child) =>
@@ -31,7 +31,7 @@ class RegisterType extends StatelessWidget{
                                   value: 1,
                                   groupValue: regist.userType,
                                   activeColor: Color(0Xff2b9bea),
-                                  onChanged: regist.changeUserType,
+                                  onChanged: (value){}
                                 )),
                         Padding(
                           padding: EdgeInsets.only(left: 10),
@@ -45,14 +45,14 @@ class RegisterType extends StatelessWidget{
                           EdgeInsets.only(left: 50, right: 50, top: 10, bottom: 80),
                           child: Align(
                               alignment: Alignment.topLeft, child: Text(studentDesc)))
-                    ]),
-                    Column(children: [
+                    ])),
+      FlatButton(onPressed:(){registerController.changeUserType(2);},child:Column(children: [
                       Row(children: [
                         Consumer<RegisterController>(builder:(_, regist, child)=>Radio(
                           value: 2,
                           groupValue: regist.userType,
                           activeColor: Color(0Xff2b9bea),
-                          onChanged: regist.changeUserType,
+                          onChanged:(value){}
                         )),
                         Padding(
                             padding: EdgeInsets.only(left: 10),
@@ -69,14 +69,14 @@ class RegisterType extends StatelessWidget{
                           EdgeInsets.only(left: 50, right: 50, top: 10, bottom: 80),
                           child: Align(
                               alignment: Alignment.topLeft, child: Text(coachDesc)))
-                    ]),
-                    Column(children: [
+                    ])),
+      FlatButton(onPressed:(){registerController.changeUserType(0);},child:Column(children: [
                       Row(children: [
                         Consumer<RegisterController>(builder:(_, regist, child)=>Radio(
                           value: 0,
                           groupValue: regist.userType,
                           activeColor: Color(0Xff2b9bea),
-                          onChanged: regist.changeUserType,
+                          onChanged: (value){}
                         )),
                         Padding(
                             padding: EdgeInsets.only(left: 10),
@@ -91,7 +91,7 @@ class RegisterType extends StatelessWidget{
                           EdgeInsets.only(left: 50, right: 50, top: 10, bottom: 80),
                           child: Align(
                               alignment: Alignment.topLeft, child: Text(instituteDesc)))
-                    ]),
+                    ])),
                   ],
                 ),
               ),
