@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shooting_app/Screens/login/login_screen/login_controller.dart';
-import 'package:shooting_app/Screens/login/register_type/register_type.dart';
+import 'package:shooting_app/Screens/login/register/register_type.dart';
 
 
 class SignIn extends StatelessWidget {
@@ -18,7 +18,7 @@ class SignIn extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final top = MediaQuery.of(context).padding.top;
 
-    return Scaffold(body: Builder(builder: (BuildContext context) {
+    return ChangeNotifierProvider(create:(context)=>LoginNotifier() , child:Scaffold(body: Builder(builder: (BuildContext context) {
       return Stack(
         children: <Widget>[
           Container(
@@ -224,6 +224,6 @@ class SignIn extends StatelessWidget {
             ),
           ),
         ],
-      ); }));
+      ); })));
   }
 }

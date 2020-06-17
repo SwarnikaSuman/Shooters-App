@@ -9,14 +9,18 @@ String confirmpass;
 
 class Signup extends StatefulWidget {
   @override
-  String type;
+  int type;
+
   Signup({this.type});
+
   _SignupState createState() => _SignupState(type: type);
 }
 
 class _SignupState extends State<Signup> {
-  String type;
+  int type;
+
   _SignupState({this.type});
+
   final signemail = TextEditingController();
   final signpass = TextEditingController();
   final signname = TextEditingController();
