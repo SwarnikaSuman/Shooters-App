@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shooting_app/Screens/login/register/register_controller.dart';
 import 'package:shooting_app/Screens/values/Strings.dart';
+import 'package:shooting_app/screens/register/register_student.dart';
+
 
 class RegisterType extends StatelessWidget{
   @override
@@ -87,24 +89,28 @@ class RegisterType extends StatelessWidget{
       ),
       Align(
           alignment: Alignment.bottomCenter,
-          child: Padding(
-              padding: EdgeInsets.all(10),
+          child: Padding(padding: EdgeInsets.all(10),
               child: Container(
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xff40dedf), Color(0xff448aff)],
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                      ),
-                      borderRadius: BorderRadius.circular(18.0)),
-                  height: 50,
-                  width: MediaQuery.of(context).size.width,
-                  child: FlatButton(
-                    onPressed: () {},
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(18))),
-                    child: Center(
-                        child: Text(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xff40dedf), Color(0xff448aff)],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
+                    borderRadius: BorderRadius.circular(18.0)),
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                child: FlatButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Signup(type: Provider.of<RegisterController>(context).userType.toString())));
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(18))),
+                  child: Center(
+                    child: Text(
                       'Proceed',
                       style: TextStyle(
                           color: Colors.white,
@@ -130,5 +136,6 @@ class RegisterType extends StatelessWidget{
             ])),
       ),
     ])));
+
   }
 }
