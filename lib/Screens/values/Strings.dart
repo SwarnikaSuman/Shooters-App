@@ -1,6 +1,6 @@
-final String student="For A Student";
-final String studentDesc="lorem ipsum";
-final String coach="For A Coach";
-final String coachDesc="lorem ipsum";
-final String institute="For An Institute";
-final String instituteDesc="lorem ipsum";
+const String student = "For A Student";
+const String studentDesc = "lorem ipsum";
+const String coach = "For A Coach";
+const String coachDesc = "lorem ipsum";
+const String institute = "For An Institute";
+const String instituteDesc = "lorem ipsum";
