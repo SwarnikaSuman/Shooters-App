@@ -1,37 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:shooting_app/Screens/login/register/register_controller.dart';
 import 'package:shooting_app/Screens/values/Strings.dart';
 
-class RegisterType extends StatefulWidget {
- 
-  @override
-  _RegisterTypeState createState() => _RegisterTypeState();
-}
-
-class _RegisterTypeState extends State<RegisterType> {
-  String _type;
-  int _radioValue;
-   void _handleRadioValueChange(int value) {
-    setState(() {
-      _radioValue = value;
-      switch (_radioValue) {
-        case 0:
-          _type = 'student';
-          break;
-        case 1:
-          _type = 'coach';
-          break;
-        case 2:
-          _type = 'institute';
-          break;
-      }
-    });
-  }
+class RegisterType extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     final top = MediaQuery.of(context).padding.top;
-    return Scaffold(
+    return ChangeNotifierProvider(create: (context) => RegisterController(),child: Scaffold(
         body: Stack(children: [
       Padding(
         padding: EdgeInsets.only(top: 100 + top, bottom: 80),
@@ -39,12 +17,12 @@ class _RegisterTypeState extends State<RegisterType> {
           children: <Widget>[
             Column(children: [
               Row(children: [
-                Radio(
+                Consumer<RegisterController>(builder:(_, regist, child)=>Radio(
                   value: 1,
-                  groupValue: _radioValue,
+                  groupValue: regist.userType,
                   activeColor: Color(0Xff2b9bea),
-                  onChanged: _handleRadioValueChange,
-                ),
+                  onChanged: regist.changeUserType,
+                )),
                 Padding(
                   padding: EdgeInsets.only(left: 10),
                   child: Text(student,
@@ -60,12 +38,12 @@ class _RegisterTypeState extends State<RegisterType> {
             ]),
             Column(children: [
               Row(children: [
-                Radio(
+    Consumer<RegisterController>(builder:(_, regist, child)=>Radio(
                   value: 2,
-                  groupValue: _radioValue,
+                  groupValue: regist.userType,
                   activeColor: Color(0Xff2b9bea),
-                  onChanged: _handleRadioValueChange,
-                ),
+                  onChanged: regist.changeUserType,
+                )),
                 Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: Text(
@@ -83,13 +61,13 @@ class _RegisterTypeState extends State<RegisterType> {
                       alignment: Alignment.topLeft, child: Text(coachDesc)))
             ]),
             Column(children: [
-              Row(children: [
-                Radio(
-                  value: 3,
-                  groupValue: _radioValue,
+   Row(children: [
+     Consumer<RegisterController>(builder:(_, regist, child)=>Radio(
+                  value: 0,
+                  groupValue: regist.userType,
                   activeColor: Color(0Xff2b9bea),
-                  onChanged: _handleRadioValueChange,
-                ),
+                  onChanged: regist.changeUserType,
+                )),
                 Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: Text(
@@ -139,7 +117,7 @@ class _RegisterTypeState extends State<RegisterType> {
         child: Padding(
             padding: EdgeInsets.only(top: top + 25, left: 20, right: 20),
             child: Column(children: [
-              Text('Hello',
+              Text('Welcome',
                   style: GoogleFonts.openSans(
                       fontSize: 40,
                       color: Color(0xff1b7bba),
@@ -151,6 +129,6 @@ class _RegisterTypeState extends State<RegisterType> {
                       fontWeight: FontWeight.w600)),
             ])),
       ),
-    ]));
+    ])));
   }
 }

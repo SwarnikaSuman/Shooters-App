@@ -8,13 +8,13 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(create:(context)=>LoginNotifier() , child:MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Shooting App',
       theme: ThemeData(
         primarySwatch: Colors.cyan,
       ),
       home: SignIn(),
-    ));
+    );
   }
 }
