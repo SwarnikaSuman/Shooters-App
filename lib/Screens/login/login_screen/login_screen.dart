@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shooting_app/Screens/login/login_screen/login_controller.dart';
-import 'package:shooting_app/Screens/login/register_type/register_type.dart';
+import 'package:shooting_app/Screens/login/register/register_type.dart';
 
 
 class SignIn extends StatelessWidget {
@@ -18,19 +18,22 @@ class SignIn extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final top = MediaQuery.of(context).padding.top;
 
-    return Scaffold(body: Builder(builder: (BuildContext context) {
-      return Stack(
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-              colors: [
-                Color(0xff2B32B2),
-                Color(0xff1488CC),
-              ],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-            )),
+    return ChangeNotifierProvider(
+        create: (context) => LoginNotifier(),
+        child: Scaffold(
+            body: Builder(
+                builder: (BuildContext context) => Stack(
+                      children: <Widget>[
+                        Container(
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                            colors: [
+                              Color(0xff2B32B2),
+                              Color(0xff1488CC),
+                            ],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                          )),
           ),
           Container(
             margin: EdgeInsets.only(top: top + 0.05 * height),
@@ -53,7 +56,7 @@ class SignIn extends StatelessWidget {
                   Stack(children:[Text(
                     "Login",
                     style: GoogleFonts.openSans(
-                        fontSize: 30, fontWeight: FontWeight.w600),
+                        fontSize: 30, fontWeight: FontWeight.w500),
                   ), Consumer<LoginNotifier>(
                     builder:(context, notif, child)=>
                       notif.isLoading ? Center(child: CircularProgressIndicator()): child,
@@ -223,7 +226,7 @@ class SignIn extends StatelessWidget {
               ),
             ),
           ),
-        ],
-      ); }));
+              ],
+            ))));
   }
 }
