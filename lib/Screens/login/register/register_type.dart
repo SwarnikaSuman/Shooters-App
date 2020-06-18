@@ -31,8 +31,8 @@ class RegisterType extends StatelessWidget{
                                   value: 1,
                                   groupValue: regist.userType,
                                   activeColor: Color(0Xff2b9bea),
-                                  onChanged: (value){}
-                                )),
+                                  onChanged: registerController
+                                                .changeUserType)),
                         Padding(
                           padding: EdgeInsets.only(left: 10),
                           child: Text(student,
@@ -52,7 +52,7 @@ class RegisterType extends StatelessWidget{
                           value: 2,
                           groupValue: regist.userType,
                           activeColor: Color(0Xff2b9bea),
-                          onChanged:(value){}
+                            onChanged: registerController.changeUserType
                         )),
                         Padding(
                             padding: EdgeInsets.only(left: 10),
@@ -76,7 +76,7 @@ class RegisterType extends StatelessWidget{
                           value: 0,
                           groupValue: regist.userType,
                           activeColor: Color(0Xff2b9bea),
-                          onChanged: (value){}
+                            onChanged: registerController.changeUserType
                         )),
                         Padding(
                             padding: EdgeInsets.only(left: 10),
