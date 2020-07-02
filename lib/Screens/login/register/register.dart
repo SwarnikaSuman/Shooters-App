@@ -20,11 +20,15 @@ class Signup extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     final top = MediaQuery.of(context).padding.top;
+    username = registerController.name;
+    signupemail = registerController.email;
+    signuppass = registerController.password;
+    confirmpass = registerController.password;
 
     return ChangeNotifierProvider.value(
         value: registerController,
         child: Scaffold(
-          //This builder is used to implement snackbar!
+            //This builder is used to implement snackbar!
             body: Builder(
                 builder: (BuildContext context) => Stack(
                       children: <Widget>[
@@ -53,13 +57,13 @@ class Signup extends StatelessWidget {
                             child: ListView(
                               padding: EdgeInsets.only(top: 5),
                               children: <Widget>[
-                                Consumer<RegisterController>(
-                                    builder: (_, regist, child) => Text(
-                                          "Sign up as a ${regist.userType == 1 ? 'Student' : 'Coach'}",
-                                          style: GoogleFonts.openSans(
-                                              fontSize: 30,
-                                              fontWeight: FontWeight.w500),
-                                        )),
+                                Text(
+                                  "Sign up as a ${registerController.userType ==
+                                      1 ? 'Student' : 'Coach'}",
+                                  style: GoogleFonts.openSans(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.w500),
+                                ),
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
                                   child: TextFormField(

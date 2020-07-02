@@ -1,10 +1,10 @@
-import 'package:flutter/widgets.dart';
-import 'package:shooting_app/Screens/login/register/register_controller.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shooting_app/Screens/login/login_screen/login_screen.dart';
+import 'package:shooting_app/Screens/login/register/register_controller.dart';
 
 class RegisterDetails extends StatelessWidget {
   RegisterDetails({@required this.registerController});
@@ -18,6 +18,8 @@ class RegisterDetails extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     final top = MediaQuery.of(context).padding.top;
+    rangeName = registerController.rangeName;
+    userMob = registerController.userMob;
 
     return ChangeNotifierProvider.value(
       value: registerController,
@@ -51,12 +53,25 @@ class RegisterDetails extends StatelessWidget {
                   child: ListView(
                     padding: EdgeInsets.only(top: 5),
                     children: <Widget>[
-                      Consumer<RegisterController>(
-                          builder: (_, regist, child) => Text(
-                                "Sign up as a ${regist.userType == 1 ? 'Student' : 'Coach'}",
-                                style: GoogleFonts.openSans(
-                                    fontSize: 30, fontWeight: FontWeight.w500),
-                              )),
+                      Row(children: [
+                        Text(
+                          "Sign up as a ${registerController.userType == 1
+                              ? 'Student'
+                              : 'Coach'}",
+                          style: GoogleFonts.openSans(
+                              fontSize: 30, fontWeight: FontWeight.w500),
+                        ),
+                        Padding(padding: EdgeInsets.only(left: 20),
+                            child: Consumer<RegisterController>(
+                                builder: (context, notif, child) =>
+                                notif
+                                    .isLoading
+                                    ? Center(
+                                    child:
+                                    CircularProgressIndicator())
+                                    : child,
+                                child: Container()))
+                      ]),
                       Padding(
                         padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
                         child: TextFormField(
@@ -115,13 +130,21 @@ class RegisterDetails extends StatelessWidget {
                               borderRadius: BorderRadius.circular(18.0)),
                           height: 50.0,
                           child: FlatButton(
-                            onPressed: () {
-                                if (registerController.secondSignUp(
-                                    rangeName, userMob)) {
-                                  //TODO: call the register function
+                            onPressed: () async {
+                              FocusScope.of(context)
+                                  .requestFocus(FocusNode());
+                              if (registerController.secondSignUp(
+                                  rangeName, userMob)) {
+                                String error = await registerController
+                                    .register();
+                                if (error == "") {
+
                                 } else {
-                                  FocusScope.of(context)
-                                      .requestFocus(FocusNode());
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                      content: Text("$error",
+                                          style: TextStyle(fontSize: 16))));
+                                }
+                              } else {
                                   Scaffold.of(context).showSnackBar(SnackBar(
                                       content: Text("Fill the details",
                                           style: TextStyle(fontSize: 16))));

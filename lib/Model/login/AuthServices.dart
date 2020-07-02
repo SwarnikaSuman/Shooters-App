@@ -1,11 +1,11 @@
 import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:shooting_app/Model/base/AuthFunctions.dart';
-import 'package:shooting_app/Model/base/ExceptionClasses.dart';
 import 'package:http/http.dart';
+import 'package:shooting_app/Model/base/AuthFunctions.dart';
 import 'package:shooting_app/Model/base/CustomNetworkCliet.dart';
-
+import 'package:shooting_app/Model/base/ExceptionClasses.dart';
 
 class AuthServices{
   final CustomNetworkClient _customNetworkClient = CustomNetworkClient();
@@ -41,28 +41,24 @@ class AuthServices{
   /// Returns false if user email is already registered
   /// Throws HttpException if response code is other than 200
   Future<bool> register({
-      @required String firstName,
-      @required String middleName,
-      @required String lastName,
-      @required String userEmail,
-      @required String userPassword,
-      @required String userMobnum,
-      @required String userType}) async{
-
-    Map<String, String> body = {
-      'firstName' : firstName,
-      'middleName' : middleName,
-      'lastName': lastName,
-      'userEmail' : userEmail,
-      'userPassword' : userPassword,
-      'userMobnum' : userMobnum,
-      'userType' : userType
+    @required String userName,
+    @required String userEmail,
+    @required String userPassword,
+    @required String userMobnum,
+    @required int userType}) async {
+    Map<String, dynamic> body = {
+      'userName': userName,
+      'userEmail': userEmail,
+      'userPassword': userPassword,
+      'userMobnum': userMobnum,
+      'userType': userType
     };
-    Response response = await _customNetworkClient.POST(url: '/users/register', body: jsonEncode(body));
-    if(response.statusCode==200){
+    Response response = await _customNetworkClient.POST(
+        url: '/users/register', body: jsonEncode(body));
+    if (response.statusCode == 200) {
       Map<String, String> registerObject = jsonDecode(response.body);
-        if(registerObject['message']=="success"){
-          return true;
+      if (registerObject['message'] == "success") {
+        return true;
         }
       return false;
     } else {
