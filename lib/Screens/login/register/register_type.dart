@@ -6,98 +6,32 @@ import 'package:shooting_app/Screens/login/register/register.dart';
 import 'package:shooting_app/Screens/login/register/register_controller.dart';
 import 'package:shooting_app/Screens/values/Strings.dart';
 
-class RegisterType extends StatelessWidget{
-  RegisterController registerController = RegisterController();
+RegisterController registerController = RegisterController();
 
+class RegisterType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final top = MediaQuery
-        .of(context)
-        .padding
-        .top;
+    final top = MediaQuery.of(context).padding.top;
     return ChangeNotifierProvider.value(
-        value: registerController, child: Scaffold(
-        body: Builder(builder: (BuildContext context) =>
-            Stack(children: [
+      value: registerController,
+      child: Scaffold(
+        body: Builder(
+          builder: (BuildContext context) => Stack(
+            children: [
               Padding(
                 padding: EdgeInsets.only(top: 100 + top, bottom: 80),
                 child: ListView(
                   children: <Widget>[
-                    FlatButton(onPressed:(){registerController.changeUserType(1);},child:Column(children: [
-                      Row(children: [
-                        Consumer<RegisterController>(
-                            builder: (_, regist, child) =>
-                                Radio(
-                                  value: 1,
-                                  groupValue: regist.userType,
-                                  activeColor: Color(0Xff2b9bea),
-                                  onChanged: registerController
-                                                .changeUserType)),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Text(student,
-                              style: GoogleFonts.openSans(
-                                  color: Colors.black, fontSize: 30)),
-                        )
-                      ]),
-                      Padding(
-                          padding:
-                          EdgeInsets.only(left: 50, right: 50, top: 10, bottom: 80),
-                          child: Align(
-                              alignment: Alignment.topLeft, child: Text(studentDesc)))
-                    ])),
-      FlatButton(onPressed:(){registerController.changeUserType(2);},child:Column(children: [
-                      Row(children: [
-                        Consumer<RegisterController>(builder:(_, regist, child)=>Radio(
-                          value: 2,
-                          groupValue: regist.userType,
-                          activeColor: Color(0Xff2b9bea),
-                            onChanged: registerController.changeUserType
-                        )),
-                        Padding(
-                            padding: EdgeInsets.only(left: 10),
-                            child: Text(
-                              coach,
-                              style: GoogleFonts.openSans(
-                                color: Colors.black,
-                                fontSize: 30,
-                              ),
-                            ))
-                      ]),
-                      Padding(
-                          padding:
-                          EdgeInsets.only(left: 50, right: 50, top: 10, bottom: 80),
-                          child: Align(
-                              alignment: Alignment.topLeft, child: Text(coachDesc)))
-                    ])),
-      FlatButton(onPressed:(){registerController.changeUserType(0);},child:Column(children: [
-                      Row(children: [
-                        Consumer<RegisterController>(builder:(_, regist, child)=>Radio(
-                          value: 0,
-                          groupValue: regist.userType,
-                          activeColor: Color(0Xff2b9bea),
-                            onChanged: registerController.changeUserType
-                        )),
-                        Padding(
-                            padding: EdgeInsets.only(left: 10),
-                            child: Text(
-                              institute,
-                              style: GoogleFonts.openSans(
-                                  color: Colors.black, fontSize: 30),
-                            ))
-                      ]),
-                      Padding(
-                          padding:
-                          EdgeInsets.only(left: 50, right: 50, top: 10, bottom: 80),
-                          child: Align(
-                              alignment: Alignment.topLeft, child: Text(instituteDesc)))
-                    ])),
+                    withRadio(1, studentDesc, student),
+                    withRadio(2, coachDesc, coach),
+                    withRadio(0, instituteDesc, institute),
                   ],
                 ),
               ),
               Align(
                   alignment: Alignment.bottomCenter,
-                  child: Padding(padding: EdgeInsets.all(10),
+                  child: Padding(
+                      padding: EdgeInsets.all(10),
                       child: Container(
                           decoration: BoxDecoration(
                               gradient: LinearGradient(
@@ -115,38 +49,47 @@ class RegisterType extends StatelessWidget{
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            Signup(
-                                                registerController: registerController)));
+                                        builder: (context) => Signup(
+                                            registerController:
+                                                registerController)));
                               } else if (registerController.userType == 0) {
                                 //TODO: Attach Google Form
                               } else {
-                                Scaffold.of(context).showSnackBar(SnackBar(
+                                Scaffold.of(context).showSnackBar(
+                                  SnackBar(
                                     duration: Duration(milliseconds: 1500),
-                                    content: Container(height: 35,
-                                        child: Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: Text("Select an option",
-                                                style: TextStyle(
-                                                    fontSize: 16))))));
+                                    content: Container(
+                                      height: 35,
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Select an option",
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
                               }
                             },
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(18))),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(18))),
                             child: Center(
                                 child: Text(
-                                  'Proceed',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w400),
-                                )),
+                              'Proceed',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400),
+                            )),
                           )))),
               Align(
                 alignment: Alignment.topCenter,
                 child: Padding(
-                    padding: EdgeInsets.only(top: top + 25, left: 20, right: 20),
-                    child: Column(children: [
+                  padding: EdgeInsets.only(top: top + 25, left: 20, right: 20),
+                  child: Column(
+                    children: [
                       Text('Welcome',
                           style: GoogleFonts.openSans(
                               fontSize: 40,
@@ -157,8 +100,55 @@ class RegisterType extends StatelessWidget{
                               fontSize: 20,
                               color: Color(0xff1b7bba),
                               fontWeight: FontWeight.w600)),
-                    ])),
+                    ],
+                  ),
+                ),
               ),
-            ]))));
+            ],
+          ),
+        ),
+      ),
+    );
   }
+}
+
+FlatButton withRadio(int type, String desc, String title) {
+  return FlatButton(
+    onPressed: () {
+      registerController.changeUserType(type);
+    },
+    child: Column(
+      children: [
+        Row(
+          children: [
+            Consumer<RegisterController>(
+              builder: (_, regist, child) => Radio(
+                value: type,
+                groupValue: regist.userType,
+                activeColor: Color(0Xff2b9bea),
+                onChanged: (value) {
+                  regist.changeUserType(value);
+                },
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Text(title,
+                  style:
+                      GoogleFonts.openSans(color: Colors.black, fontSize: 30)),
+            ),
+          ],
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: 50, right: 50, top: 10, bottom: 80),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: Text(
+              desc,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }
