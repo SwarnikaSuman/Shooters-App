@@ -11,7 +11,6 @@ class LoginNotifier extends ChangeNotifier{
   bool isLoading=false;
   int authState=0;
 
-
   Future<String> login({@required String email, @required String password}) async{
     isLoading=true;
     String error="";
