@@ -126,7 +126,9 @@ FlatButton withRadio(int type, String desc, String title) {
                 value: type,
                 groupValue: regist.userType,
                 activeColor: Color(0Xff2b9bea),
-                onChanged: (value) {},
+                onChanged: (value) {
+                  regist.changeUserType(value);
+                },
               ),
             ),
             Padding(
