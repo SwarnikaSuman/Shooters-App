@@ -7,5 +7,4 @@ class AuthFunction{
   Future<bool> storeToken(String JWT) => TokenPlayground.storeJWT(JWT);
 
   Future<bool> deleteToken() => TokenPlayground.deleteJWT();
-
 }

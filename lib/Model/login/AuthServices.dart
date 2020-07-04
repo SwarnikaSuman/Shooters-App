@@ -13,15 +13,16 @@ class AuthServices{
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: ['email']
   );
+
   /// Throws WriteException if unable to save the JWT
   /// Throws HttpException if respone code is other than 200
   Future<Null> login({@required String email, @required String password}) async{
     Map<String, dynamic> body = {'userEmail' : email, 'userPassword' : password};
     Response response = await _customNetworkClient.POST(url: '/users/login', body: jsonEncode(body));
     if(response.statusCode==200){
-
         Map<String, dynamic> loginObject = jsonDecode(response.body);
         if(loginObject.containsKey('jwttoken')){
+
           bool storeStatus = await _authFunction.storeToken(loginObject['jwttoken']);
           if(!storeStatus){
             storeStatus = await _authFunction.storeToken(loginObject['jwttoken']);
@@ -36,6 +37,7 @@ class AuthServices{
         throw HttpException(response.statusCode);
       }
   }
+
 
   /// Returns true if user registers successfully
   /// Returns false if user email is already registered
@@ -66,11 +68,13 @@ class AuthServices{
     }
   }
 
+
   Future<Null> signInWithGoogle() async{
     await _googleSignIn.signOut();
     GoogleSignInAccount account = await _googleSignIn.signIn();
     //TODO: Implement Google Sign In with Backend
   }
+
 
   Future<Null> linkGoogleAccount() async{
   await _googleSignIn.signOut();

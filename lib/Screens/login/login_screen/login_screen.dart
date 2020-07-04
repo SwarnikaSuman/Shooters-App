@@ -151,7 +151,7 @@ class SignIn extends StatelessWidget {
                                                 .showSnackBar(SnackBar(
                                               content: Text(error),
                                             ));
-                                          }
+                                          } else {}
                                         }
                                       },
                                       shape: RoundedRectangleBorder(
