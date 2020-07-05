@@ -6,6 +6,7 @@ import 'package:http/http.dart';
 import 'package:shooting_app/Model/base/AuthFunctions.dart';
 import 'package:shooting_app/Model/base/CustomNetworkCliet.dart';
 import 'package:shooting_app/Model/base/ExceptionClasses.dart';
+import 'package:shooting_app/Model/database/moor_database.dart';
 
 class AuthServices{
   final CustomNetworkClient _customNetworkClient = CustomNetworkClient();
@@ -22,15 +23,21 @@ class AuthServices{
     if(response.statusCode==200){
         Map<String, dynamic> loginObject = jsonDecode(response.body);
         if(loginObject.containsKey('jwttoken')){
-
-          bool storeStatus = await _authFunction.storeToken(loginObject['jwttoken']);
-          if(!storeStatus){
-            storeStatus = await _authFunction.storeToken(loginObject['jwttoken']);
-            if(!storeStatus){
-              throw WriteException();
-            }
+          bool storeStatus =
+            await _authFunction.storeToken(loginObject['jwttoken']);
+        if (!storeStatus) {
+          storeStatus = await _authFunction.storeToken(loginObject['jwttoken']);
+          if (!storeStatus) {
+            throw WriteException();
           }
-        }else{
+        }
+        final AppDatabase _appDatabase = AppDatabase();
+        await _appDatabase.userLogDao.clearUserLog();
+        await _appDatabase.userLogDao.insertUserLog(UserLogTable(
+            Name: loginObject['Name'],
+            email: loginObject['email'],
+            userType: loginObject['userType']));
+      }else{
           throw InvalidCredentials();
         }
       } else {

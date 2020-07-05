@@ -11,10 +11,8 @@ class UserLogTable extends DataClass implements Insertable<UserLogTable> {
   final int userType;
   final String Name;
   final String email;
-
   UserLogTable(
       {@required this.userType, @required this.Name, @required this.email});
-
   factory UserLogTable.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
@@ -28,7 +26,6 @@ class UserLogTable extends DataClass implements Insertable<UserLogTable> {
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}email']),
     );
   }
-
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -64,7 +61,6 @@ class UserLogTable extends DataClass implements Insertable<UserLogTable> {
       email: serializer.fromJson<String>(json['email']),
     );
   }
-
   @override
   Map<String, dynamic> toJson({ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
@@ -81,7 +77,6 @@ class UserLogTable extends DataClass implements Insertable<UserLogTable> {
         Name: Name ?? this.Name,
         email: email ?? this.email,
       );
-
   @override
   String toString() {
     return (StringBuffer('UserLogTable(')
@@ -95,7 +90,6 @@ class UserLogTable extends DataClass implements Insertable<UserLogTable> {
   @override
   int get hashCode =>
       $mrjf($mrjc(userType.hashCode, $mrjc(Name.hashCode, email.hashCode)));
-
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
@@ -109,13 +103,11 @@ class UserLogTablesCompanion extends UpdateCompanion<UserLogTable> {
   final Value<int> userType;
   final Value<String> Name;
   final Value<String> email;
-
   const UserLogTablesCompanion({
     this.userType = const Value.absent(),
     this.Name = const Value.absent(),
     this.email = const Value.absent(),
   });
-
   UserLogTablesCompanion.insert({
     @required int userType,
     @required String Name,
@@ -123,7 +115,6 @@ class UserLogTablesCompanion extends UpdateCompanion<UserLogTable> {
   })  : userType = Value(userType),
         Name = Value(Name),
         email = Value(email);
-
   static Insertable<UserLogTable> custom({
     Expression<int> userType,
     Expression<String> Name,
@@ -175,15 +166,11 @@ class $UserLogTablesTable extends UserLogTables
     with TableInfo<$UserLogTablesTable, UserLogTable> {
   final GeneratedDatabase _db;
   final String _alias;
-
   $UserLogTablesTable(this._db, [this._alias]);
-
   final VerificationMeta _userTypeMeta = const VerificationMeta('userType');
   GeneratedIntColumn _userType;
-
   @override
   GeneratedIntColumn get userType => _userType ??= _constructUserType();
-
   GeneratedIntColumn _constructUserType() {
     return GeneratedIntColumn(
       'user_type',
@@ -194,10 +181,8 @@ class $UserLogTablesTable extends UserLogTables
 
   final VerificationMeta _NameMeta = const VerificationMeta('Name');
   GeneratedTextColumn _Name;
-
   @override
   GeneratedTextColumn get Name => _Name ??= _constructName();
-
   GeneratedTextColumn _constructName() {
     return GeneratedTextColumn(
       'name',
@@ -208,10 +193,8 @@ class $UserLogTablesTable extends UserLogTables
 
   final VerificationMeta _emailMeta = const VerificationMeta('email');
   GeneratedTextColumn _email;
-
   @override
   GeneratedTextColumn get email => _email ??= _constructEmail();
-
   GeneratedTextColumn _constructEmail() {
     return GeneratedTextColumn(
       'email',
@@ -222,15 +205,12 @@ class $UserLogTablesTable extends UserLogTables
 
   @override
   List<GeneratedColumn> get $columns => [userType, Name, email];
-
   @override
   $UserLogTablesTable get asDslTable => this;
-
   @override
   String get $tableName => _alias ?? 'user_log_tables';
   @override
   final String actualTableName = 'user_log_tables';
-
   @override
   VerificationContext validateIntegrity(Insertable<UserLogTable> instance,
       {bool isInserting = false}) {
@@ -259,7 +239,6 @@ class $UserLogTablesTable extends UserLogTables
 
   @override
   Set<GeneratedColumn> get $primaryKey => {email};
-
   @override
   UserLogTable map(Map<String, dynamic> data, {String tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
@@ -275,16 +254,12 @@ class $UserLogTablesTable extends UserLogTables
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   $UserLogTablesTable _userLogTables;
-
   $UserLogTablesTable get userLogTables =>
       _userLogTables ??= $UserLogTablesTable(this);
   UserLogDao _userLogDao;
-
   UserLogDao get userLogDao => _userLogDao ??= UserLogDao(this as AppDatabase);
-
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
-
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [userLogTables];
 }
