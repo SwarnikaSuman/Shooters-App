@@ -1,20 +1,16 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class TokenPlayground{
-  static String _JWT="";
-  static bool updated=false;
+  static String _JWT = "";
+  static int _userType = -1;
+  static bool updated = false;
 
   /// JWT Functions
   static Future<Null> updateJWT() {
-    FlutterSecureStorage().read(key: "JWT").
-    then((onValue) {
-      if (onValue!=null){
-        _JWT=onValue;
-      }else{
-        _JWT="";
-      }
-      updated=true;
-    }).catchError((onError){
+    FlutterSecureStorage().read(key: "JWT").then((onValue) {
+      _JWT = onValue ?? "";
+      updated = true;
+    }).catchError((onError) {
       updateJWT();
     });
   }
