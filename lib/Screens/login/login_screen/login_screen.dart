@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:shooting_app/Screens/customwigets/text_input.dart';
 import 'package:shooting_app/Screens/login/login_screen/login_controller.dart';
 import 'package:shooting_app/Screens/login/register/register_type.dart';
 
@@ -65,55 +66,21 @@ class SignIn extends StatelessWidget {
                                                   CircularProgressIndicator())
                                           : child,
                                       child: Container())
-                                ]), //isLoading ?  Center(child: CircularProgressIndicator()) : Container()]),
+                                ]),
+                                //isLoading ?  Center(child: CircularProgressIndicator()) : Container()]),
                                 Padding(
-                                  padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                                  child: TextFormField(
-                                    style: GoogleFonts.openSans(
-                                      color: Colors.black,
-                                    ),
+                                    padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                    child: InputText(
+                                        onChanged: (_) {
+                                          emailuser = _;
+                                        },
+                                        labelText: 'Email')),
+                                InputText(
                                     onChanged: (_) {
-                                      emailuser = _;
-                                      print(emailuser);
+                                      passuser = _;
                                     },
-                                    decoration: InputDecoration(
-                                        fillColor: Color(0xfff5f5f5),
-                                        filled: true,
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(18),
-                                        ),
-                                        labelText: 'Email',
-                                        prefixIcon: Icon(Icons.person_outline),
-                                        labelStyle:
-                                            GoogleFonts.openSans(fontSize: 15)),
-                                  ),
-                                ),
-                                TextFormField(
-                                  obscureText: true,
-                                  style: GoogleFonts.openSans(
-                                    color: Colors.black,
-                                  ),
-                                  onChanged: (_) {
-                                    passuser = _;
-                                  },
-                                  decoration: InputDecoration(
-                                      fillColor: Color(0xfff5f5f5),
-                                      filled: true,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                        ),
-                                        borderRadius: BorderRadius.circular(18),
-                                      ),
-                                      labelText: 'Password',
-                                      prefixIcon: Icon(Icons.lock_outline),
-                                      labelStyle:
-                                          GoogleFonts.openSans(fontSize: 15)),
-                                ),
+                                    obscureText: true,
+                                    labelText: 'Password'),
                                 Padding(
                                   padding: EdgeInsets.only(top: 20),
                                   child: Container(
