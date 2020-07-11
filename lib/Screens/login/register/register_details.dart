@@ -5,11 +5,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shooting_app/Screens/login/login_screen/login_screen.dart';
 import 'package:shooting_app/Screens/login/register/register_controller.dart';
+import 'package:shooting_app/screens/profile/profile_controller.dart';
+import 'package:shooting_app/screens/profile/profilepage.dart';
 
 class RegisterDetails extends StatelessWidget {
   RegisterDetails({@required this.registerController});
 
   RegisterController registerController;
+  ProfileController profileController = ProfileController();
   String rangeName = "";
   String userMob = "";
 
@@ -55,20 +58,16 @@ class RegisterDetails extends StatelessWidget {
                     children: <Widget>[
                       Row(children: [
                         Text(
-                          "Sign up as a ${registerController.userType == 1
-                              ? 'Student'
-                              : 'Coach'}",
+                          "Sign up as a ${(registerController.userType == 1) ? 'Student' : 'Coach'}",
                           style: GoogleFonts.openSans(
                               fontSize: 30, fontWeight: FontWeight.w500),
                         ),
-                        Padding(padding: EdgeInsets.only(left: 20),
+                        Padding(
+                            padding: EdgeInsets.only(left: 20),
                             child: Consumer<RegisterController>(
-                                builder: (context, notif, child) =>
-                                notif
-                                    .isLoading
-                                    ? Center(
-                                    child:
-                                    CircularProgressIndicator())
+                                builder: (context, notif, child) => notif
+                                        .isLoading
+                                    ? Center(child: CircularProgressIndicator())
                                     : child,
                                 child: Container()))
                       ]),
@@ -116,7 +115,6 @@ class RegisterDetails extends StatelessWidget {
                           labelStyle: GoogleFonts.openSans(fontSize: 15),
                         ),
                       ),
-                      
                       Padding(
                         padding: EdgeInsets.only(top: 20),
                         child: Container(
@@ -131,25 +129,29 @@ class RegisterDetails extends StatelessWidget {
                           height: 50.0,
                           child: FlatButton(
                             onPressed: () async {
-                              FocusScope.of(context)
-                                  .requestFocus(FocusNode());
+                              FocusScope.of(context).requestFocus(FocusNode());
                               if (registerController.secondSignUp(
                                   rangeName, userMob)) {
-                                String error = await registerController
-                                    .register();
+                                String error =
+                                    await registerController.register();
                                 if (error == "") {
-
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          DecideWhichProfile("initStatus"),
+                                    ),
+                                  );
                                 } else {
                                   Scaffold.of(context).showSnackBar(SnackBar(
                                       content: Text("$error",
                                           style: TextStyle(fontSize: 16))));
                                 }
                               } else {
-                                  Scaffold.of(context).showSnackBar(SnackBar(
-                                      content: Text("Fill the details",
-                                          style: TextStyle(fontSize: 16))));
-                                }
-                              
+                                Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text("Fill the details",
+                                        style: TextStyle(fontSize: 16))));
+                              }
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius:
