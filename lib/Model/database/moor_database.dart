@@ -1,7 +1,7 @@
 import 'package:moor_flutter/moor_flutter.dart';
 import 'package:shooting_app/Model/login/local/userlog_dao.dart';
 import 'package:shooting_app/Model/login/local/userlog_table.dart';
-import 'package:shooting_app/screens/profile/model_profile/profile_table.dart';
+import 'package:shooting_app/Model/model_profile/profile_table.dart';
 
 part 'moor_database.g.dart';
 

@@ -5,15 +5,14 @@ import 'package:http/http.dart';
 import 'package:shooting_app/Model/base/CustomNetworkCliet.dart';
 import 'package:shooting_app/Model/base/ExceptionClasses.dart';
 import 'package:shooting_app/Model/database/moor_database.dart';
-import 'package:shooting_app/screens/profile/model_profile/profile_dao.dart';
-import 'package:shooting_app/screens/profile/model_profile/profile_table.dart';
-import 'package:shooting_app/screens/values/Strings.dart';
+import 'package:shooting_app/Model/model_profile/getProfile_model.dart';
+import 'package:shooting_app/Model/model_profile/profile_dao.dart';
 
 class ManageProfile {
   final CustomNetworkClient _customNetworkClient = CustomNetworkClient();
   ProfileDao profileDao;
 
-  Future<bool> registerProfile({
+  Future<bool> updateProfile({
     @required String motherName,
     @required String fatherName,
     @required String profilePhoto,
@@ -68,27 +67,48 @@ class ManageProfile {
     }
   }
 
-  void addProfiletoDatabase() {
-    final profile = ProfileTable(
-      motherName: "",
-      fatherName: "",
-      recoveryEmail: "",
-      organization: "",
-      createdBy: "",
-      houseNo: 1,
-      locality: "",
-      landmark: "",
-      city: "",
-      postalCode: 1,
-      profileDob: "",
-      profileGender: "",
-      profileNationality: "",
-      profileOccupation: "",
-      profilePhoto: "",
-      profileQual: "",
-      secondaryMobnum: "",
-      state: "",
+  Future<void> addProfiletoDatabase() async {
+    Response response = await _customNetworkClient.GET(
+      url: '/users/showprofile',
     );
-    profileDao.insertProfile(profile);
+    if (response.statusCode == 200) {
+      //This takes response and maps it onto a profile model
+      GetProfile profile = GetProfile.fromJson(json.decode(response.body));
+
+      //This profileData is an object of table and reads values from the profile model
+      final profileData = ProfileTable(
+        profileName: profile.profileName,
+        modifiedOn: profile.modifiedOn,
+        modifiedBy: profile.modifiedBy,
+        role: profile.role,
+        profileEmail: profile.profileEmail,
+        profileMobnum: profile.profileMobnum,
+        createdOn: profile.createdOn,
+        isActive: profile.isActive,
+        profileType: profile.profileType,
+        isApproved: profile.isApproved,
+        addressId: profile.addressId,
+        addressEmail: profile.addressEmail,
+        motherName: profile.motherName,
+        fatherName: profile.fatherName,
+        recoveryEmail: profile.recoveryEmail,
+        organization: profile.organization,
+        createdBy: profile.createdBy,
+        houseNo: profile.houseNo,
+        locality: profile.locality,
+        landmark: profile.landmark,
+        city: profile.city,
+        postalCode: profile.postalCode,
+        profileDob: profile.profileDob,
+        profileGender: profile.profileGender,
+        profileNationality: profile.profileNationality,
+        profileOccupation: profile.profileOccupation,
+        profilePhoto: profile.profilePhoto,
+        profileQual: profile.profileQual,
+        secondaryMobnum: profile.secondaryMobnum,
+        state: profile.state,
+      );
+      profileDao.insertProfile(profileData);
+    }
   }
 }

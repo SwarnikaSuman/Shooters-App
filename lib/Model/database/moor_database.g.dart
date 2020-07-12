@@ -270,6 +270,18 @@ class ProfileTable extends DataClass implements Insertable<ProfileTable> {
   final String city;
   final String state;
   final int postalCode;
+  final String profileName;
+  final String modifiedOn;
+  final String modifiedBy;
+  final String role;
+  final String profileEmail;
+  final String profileMobnum;
+  final String createdOn;
+  final String addressEmail;
+  final int isActive;
+  final int profileType;
+  final int isApproved;
+  final int addressId;
   ProfileTable(
       {@required this.motherName,
       @required this.fatherName,
@@ -288,7 +300,19 @@ class ProfileTable extends DataClass implements Insertable<ProfileTable> {
       @required this.landmark,
       @required this.city,
       @required this.state,
-      @required this.postalCode});
+      @required this.postalCode,
+      @required this.profileName,
+      @required this.modifiedOn,
+      @required this.modifiedBy,
+      @required this.role,
+      @required this.profileEmail,
+      @required this.profileMobnum,
+      @required this.createdOn,
+      @required this.addressEmail,
+      @required this.isActive,
+      @required this.profileType,
+      @required this.isApproved,
+      @required this.addressId});
   factory ProfileTable.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
@@ -330,6 +354,29 @@ class ProfileTable extends DataClass implements Insertable<ProfileTable> {
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}state']),
       postalCode: intType
           .mapFromDatabaseResponse(data['${effectivePrefix}postal_code']),
+      profileName: stringType
+          .mapFromDatabaseResponse(data['${effectivePrefix}profile_name']),
+      modifiedOn: stringType
+          .mapFromDatabaseResponse(data['${effectivePrefix}modified_on']),
+      modifiedBy: stringType
+          .mapFromDatabaseResponse(data['${effectivePrefix}modified_by']),
+      role: stringType.mapFromDatabaseResponse(data['${effectivePrefix}role']),
+      profileEmail: stringType
+          .mapFromDatabaseResponse(data['${effectivePrefix}profile_email']),
+      profileMobnum: stringType
+          .mapFromDatabaseResponse(data['${effectivePrefix}profile_mobnum']),
+      createdOn: stringType
+          .mapFromDatabaseResponse(data['${effectivePrefix}created_on']),
+      addressEmail: stringType
+          .mapFromDatabaseResponse(data['${effectivePrefix}address_email']),
+      isActive:
+          intType.mapFromDatabaseResponse(data['${effectivePrefix}is_active']),
+      profileType: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}profile_type']),
+      isApproved: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}is_approved']),
+      addressId:
+          intType.mapFromDatabaseResponse(data['${effectivePrefix}address_id']),
     );
   }
   @override
@@ -389,6 +436,42 @@ class ProfileTable extends DataClass implements Insertable<ProfileTable> {
     if (!nullToAbsent || postalCode != null) {
       map['postal_code'] = Variable<int>(postalCode);
     }
+    if (!nullToAbsent || profileName != null) {
+      map['profile_name'] = Variable<String>(profileName);
+    }
+    if (!nullToAbsent || modifiedOn != null) {
+      map['modified_on'] = Variable<String>(modifiedOn);
+    }
+    if (!nullToAbsent || modifiedBy != null) {
+      map['modified_by'] = Variable<String>(modifiedBy);
+    }
+    if (!nullToAbsent || role != null) {
+      map['role'] = Variable<String>(role);
+    }
+    if (!nullToAbsent || profileEmail != null) {
+      map['profile_email'] = Variable<String>(profileEmail);
+    }
+    if (!nullToAbsent || profileMobnum != null) {
+      map['profile_mobnum'] = Variable<String>(profileMobnum);
+    }
+    if (!nullToAbsent || createdOn != null) {
+      map['created_on'] = Variable<String>(createdOn);
+    }
+    if (!nullToAbsent || addressEmail != null) {
+      map['address_email'] = Variable<String>(addressEmail);
+    }
+    if (!nullToAbsent || isActive != null) {
+      map['is_active'] = Variable<int>(isActive);
+    }
+    if (!nullToAbsent || profileType != null) {
+      map['profile_type'] = Variable<int>(profileType);
+    }
+    if (!nullToAbsent || isApproved != null) {
+      map['is_approved'] = Variable<int>(isApproved);
+    }
+    if (!nullToAbsent || addressId != null) {
+      map['address_id'] = Variable<int>(addressId);
+    }
     return map;
   }
 
@@ -445,6 +528,40 @@ class ProfileTable extends DataClass implements Insertable<ProfileTable> {
       postalCode: postalCode == null && nullToAbsent
           ? const Value.absent()
           : Value(postalCode),
+      profileName: profileName == null && nullToAbsent
+          ? const Value.absent()
+          : Value(profileName),
+      modifiedOn: modifiedOn == null && nullToAbsent
+          ? const Value.absent()
+          : Value(modifiedOn),
+      modifiedBy: modifiedBy == null && nullToAbsent
+          ? const Value.absent()
+          : Value(modifiedBy),
+      role: role == null && nullToAbsent ? const Value.absent() : Value(role),
+      profileEmail: profileEmail == null && nullToAbsent
+          ? const Value.absent()
+          : Value(profileEmail),
+      profileMobnum: profileMobnum == null && nullToAbsent
+          ? const Value.absent()
+          : Value(profileMobnum),
+      createdOn: createdOn == null && nullToAbsent
+          ? const Value.absent()
+          : Value(createdOn),
+      addressEmail: addressEmail == null && nullToAbsent
+          ? const Value.absent()
+          : Value(addressEmail),
+      isActive: isActive == null && nullToAbsent
+          ? const Value.absent()
+          : Value(isActive),
+      profileType: profileType == null && nullToAbsent
+          ? const Value.absent()
+          : Value(profileType),
+      isApproved: isApproved == null && nullToAbsent
+          ? const Value.absent()
+          : Value(isApproved),
+      addressId: addressId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(addressId),
     );
   }
 
@@ -471,6 +588,18 @@ class ProfileTable extends DataClass implements Insertable<ProfileTable> {
       city: serializer.fromJson<String>(json['city']),
       state: serializer.fromJson<String>(json['state']),
       postalCode: serializer.fromJson<int>(json['postalCode']),
+      profileName: serializer.fromJson<String>(json['profileName']),
+      modifiedOn: serializer.fromJson<String>(json['modifiedOn']),
+      modifiedBy: serializer.fromJson<String>(json['modifiedBy']),
+      role: serializer.fromJson<String>(json['role']),
+      profileEmail: serializer.fromJson<String>(json['profileEmail']),
+      profileMobnum: serializer.fromJson<String>(json['profileMobnum']),
+      createdOn: serializer.fromJson<String>(json['createdOn']),
+      addressEmail: serializer.fromJson<String>(json['addressEmail']),
+      isActive: serializer.fromJson<int>(json['isActive']),
+      profileType: serializer.fromJson<int>(json['profileType']),
+      isApproved: serializer.fromJson<int>(json['isApproved']),
+      addressId: serializer.fromJson<int>(json['addressId']),
     );
   }
   @override
@@ -495,6 +624,18 @@ class ProfileTable extends DataClass implements Insertable<ProfileTable> {
       'city': serializer.toJson<String>(city),
       'state': serializer.toJson<String>(state),
       'postalCode': serializer.toJson<int>(postalCode),
+      'profileName': serializer.toJson<String>(profileName),
+      'modifiedOn': serializer.toJson<String>(modifiedOn),
+      'modifiedBy': serializer.toJson<String>(modifiedBy),
+      'role': serializer.toJson<String>(role),
+      'profileEmail': serializer.toJson<String>(profileEmail),
+      'profileMobnum': serializer.toJson<String>(profileMobnum),
+      'createdOn': serializer.toJson<String>(createdOn),
+      'addressEmail': serializer.toJson<String>(addressEmail),
+      'isActive': serializer.toJson<int>(isActive),
+      'profileType': serializer.toJson<int>(profileType),
+      'isApproved': serializer.toJson<int>(isApproved),
+      'addressId': serializer.toJson<int>(addressId),
     };
   }
 
@@ -516,7 +657,19 @@ class ProfileTable extends DataClass implements Insertable<ProfileTable> {
           String landmark,
           String city,
           String state,
-          int postalCode}) =>
+          int postalCode,
+          String profileName,
+          String modifiedOn,
+          String modifiedBy,
+          String role,
+          String profileEmail,
+          String profileMobnum,
+          String createdOn,
+          String addressEmail,
+          int isActive,
+          int profileType,
+          int isApproved,
+          int addressId}) =>
       ProfileTable(
         motherName: motherName ?? this.motherName,
         fatherName: fatherName ?? this.fatherName,
@@ -536,6 +689,18 @@ class ProfileTable extends DataClass implements Insertable<ProfileTable> {
         city: city ?? this.city,
         state: state ?? this.state,
         postalCode: postalCode ?? this.postalCode,
+        profileName: profileName ?? this.profileName,
+        modifiedOn: modifiedOn ?? this.modifiedOn,
+        modifiedBy: modifiedBy ?? this.modifiedBy,
+        role: role ?? this.role,
+        profileEmail: profileEmail ?? this.profileEmail,
+        profileMobnum: profileMobnum ?? this.profileMobnum,
+        createdOn: createdOn ?? this.createdOn,
+        addressEmail: addressEmail ?? this.addressEmail,
+        isActive: isActive ?? this.isActive,
+        profileType: profileType ?? this.profileType,
+        isApproved: isApproved ?? this.isApproved,
+        addressId: addressId ?? this.addressId,
       );
   @override
   String toString() {
@@ -557,7 +722,19 @@ class ProfileTable extends DataClass implements Insertable<ProfileTable> {
           ..write('landmark: $landmark, ')
           ..write('city: $city, ')
           ..write('state: $state, ')
-          ..write('postalCode: $postalCode')
+          ..write('postalCode: $postalCode, ')
+          ..write('profileName: $profileName, ')
+          ..write('modifiedOn: $modifiedOn, ')
+          ..write('modifiedBy: $modifiedBy, ')
+          ..write('role: $role, ')
+          ..write('profileEmail: $profileEmail, ')
+          ..write('profileMobnum: $profileMobnum, ')
+          ..write('createdOn: $createdOn, ')
+          ..write('addressEmail: $addressEmail, ')
+          ..write('isActive: $isActive, ')
+          ..write('profileType: $profileType, ')
+          ..write('isApproved: $isApproved, ')
+          ..write('addressId: $addressId')
           ..write(')'))
         .toString();
   }
@@ -598,8 +775,12 @@ class ProfileTable extends DataClass implements Insertable<ProfileTable> {
                                                                   $mrjc(
                                                                       state
                                                                           .hashCode,
-                                                                      postalCode
-                                                                          .hashCode))))))))))))))))));
+                                                                      $mrjc(
+                                                                          postalCode
+                                                                              .hashCode,
+                                                                          $mrjc(
+                                                                              profileName.hashCode,
+                                                                              $mrjc(modifiedOn.hashCode, $mrjc(modifiedBy.hashCode, $mrjc(role.hashCode, $mrjc(profileEmail.hashCode, $mrjc(profileMobnum.hashCode, $mrjc(createdOn.hashCode, $mrjc(addressEmail.hashCode, $mrjc(isActive.hashCode, $mrjc(profileType.hashCode, $mrjc(isApproved.hashCode, addressId.hashCode))))))))))))))))))))))))))))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
@@ -621,7 +802,19 @@ class ProfileTable extends DataClass implements Insertable<ProfileTable> {
           other.landmark == this.landmark &&
           other.city == this.city &&
           other.state == this.state &&
-          other.postalCode == this.postalCode);
+          other.postalCode == this.postalCode &&
+          other.profileName == this.profileName &&
+          other.modifiedOn == this.modifiedOn &&
+          other.modifiedBy == this.modifiedBy &&
+          other.role == this.role &&
+          other.profileEmail == this.profileEmail &&
+          other.profileMobnum == this.profileMobnum &&
+          other.createdOn == this.createdOn &&
+          other.addressEmail == this.addressEmail &&
+          other.isActive == this.isActive &&
+          other.profileType == this.profileType &&
+          other.isApproved == this.isApproved &&
+          other.addressId == this.addressId);
 }
 
 class ProfileTablesCompanion extends UpdateCompanion<ProfileTable> {
@@ -643,6 +836,18 @@ class ProfileTablesCompanion extends UpdateCompanion<ProfileTable> {
   final Value<String> city;
   final Value<String> state;
   final Value<int> postalCode;
+  final Value<String> profileName;
+  final Value<String> modifiedOn;
+  final Value<String> modifiedBy;
+  final Value<String> role;
+  final Value<String> profileEmail;
+  final Value<String> profileMobnum;
+  final Value<String> createdOn;
+  final Value<String> addressEmail;
+  final Value<int> isActive;
+  final Value<int> profileType;
+  final Value<int> isApproved;
+  final Value<int> addressId;
   const ProfileTablesCompanion({
     this.motherName = const Value.absent(),
     this.fatherName = const Value.absent(),
@@ -662,6 +867,18 @@ class ProfileTablesCompanion extends UpdateCompanion<ProfileTable> {
     this.city = const Value.absent(),
     this.state = const Value.absent(),
     this.postalCode = const Value.absent(),
+    this.profileName = const Value.absent(),
+    this.modifiedOn = const Value.absent(),
+    this.modifiedBy = const Value.absent(),
+    this.role = const Value.absent(),
+    this.profileEmail = const Value.absent(),
+    this.profileMobnum = const Value.absent(),
+    this.createdOn = const Value.absent(),
+    this.addressEmail = const Value.absent(),
+    this.isActive = const Value.absent(),
+    this.profileType = const Value.absent(),
+    this.isApproved = const Value.absent(),
+    this.addressId = const Value.absent(),
   });
   ProfileTablesCompanion.insert({
     @required String motherName,
@@ -682,6 +899,18 @@ class ProfileTablesCompanion extends UpdateCompanion<ProfileTable> {
     @required String city,
     @required String state,
     @required int postalCode,
+    @required String profileName,
+    @required String modifiedOn,
+    @required String modifiedBy,
+    @required String role,
+    @required String profileEmail,
+    @required String profileMobnum,
+    @required String createdOn,
+    @required String addressEmail,
+    @required int isActive,
+    @required int profileType,
+    @required int isApproved,
+    @required int addressId,
   })  : motherName = Value(motherName),
         fatherName = Value(fatherName),
         profilePhoto = Value(profilePhoto),
@@ -699,7 +928,19 @@ class ProfileTablesCompanion extends UpdateCompanion<ProfileTable> {
         landmark = Value(landmark),
         city = Value(city),
         state = Value(state),
-        postalCode = Value(postalCode);
+        postalCode = Value(postalCode),
+        profileName = Value(profileName),
+        modifiedOn = Value(modifiedOn),
+        modifiedBy = Value(modifiedBy),
+        role = Value(role),
+        profileEmail = Value(profileEmail),
+        profileMobnum = Value(profileMobnum),
+        createdOn = Value(createdOn),
+        addressEmail = Value(addressEmail),
+        isActive = Value(isActive),
+        profileType = Value(profileType),
+        isApproved = Value(isApproved),
+        addressId = Value(addressId);
   static Insertable<ProfileTable> custom({
     Expression<String> motherName,
     Expression<String> fatherName,
@@ -719,6 +960,18 @@ class ProfileTablesCompanion extends UpdateCompanion<ProfileTable> {
     Expression<String> city,
     Expression<String> state,
     Expression<int> postalCode,
+    Expression<String> profileName,
+    Expression<String> modifiedOn,
+    Expression<String> modifiedBy,
+    Expression<String> role,
+    Expression<String> profileEmail,
+    Expression<String> profileMobnum,
+    Expression<String> createdOn,
+    Expression<String> addressEmail,
+    Expression<int> isActive,
+    Expression<int> profileType,
+    Expression<int> isApproved,
+    Expression<int> addressId,
   }) {
     return RawValuesInsertable({
       if (motherName != null) 'mother_name': motherName,
@@ -739,6 +992,18 @@ class ProfileTablesCompanion extends UpdateCompanion<ProfileTable> {
       if (city != null) 'city': city,
       if (state != null) 'state': state,
       if (postalCode != null) 'postal_code': postalCode,
+      if (profileName != null) 'profile_name': profileName,
+      if (modifiedOn != null) 'modified_on': modifiedOn,
+      if (modifiedBy != null) 'modified_by': modifiedBy,
+      if (role != null) 'role': role,
+      if (profileEmail != null) 'profile_email': profileEmail,
+      if (profileMobnum != null) 'profile_mobnum': profileMobnum,
+      if (createdOn != null) 'created_on': createdOn,
+      if (addressEmail != null) 'address_email': addressEmail,
+      if (isActive != null) 'is_active': isActive,
+      if (profileType != null) 'profile_type': profileType,
+      if (isApproved != null) 'is_approved': isApproved,
+      if (addressId != null) 'address_id': addressId,
     });
   }
 
@@ -760,7 +1025,19 @@ class ProfileTablesCompanion extends UpdateCompanion<ProfileTable> {
       Value<String> landmark,
       Value<String> city,
       Value<String> state,
-      Value<int> postalCode}) {
+      Value<int> postalCode,
+      Value<String> profileName,
+      Value<String> modifiedOn,
+      Value<String> modifiedBy,
+      Value<String> role,
+      Value<String> profileEmail,
+      Value<String> profileMobnum,
+      Value<String> createdOn,
+      Value<String> addressEmail,
+      Value<int> isActive,
+      Value<int> profileType,
+      Value<int> isApproved,
+      Value<int> addressId}) {
     return ProfileTablesCompanion(
       motherName: motherName ?? this.motherName,
       fatherName: fatherName ?? this.fatherName,
@@ -780,6 +1057,18 @@ class ProfileTablesCompanion extends UpdateCompanion<ProfileTable> {
       city: city ?? this.city,
       state: state ?? this.state,
       postalCode: postalCode ?? this.postalCode,
+      profileName: profileName ?? this.profileName,
+      modifiedOn: modifiedOn ?? this.modifiedOn,
+      modifiedBy: modifiedBy ?? this.modifiedBy,
+      role: role ?? this.role,
+      profileEmail: profileEmail ?? this.profileEmail,
+      profileMobnum: profileMobnum ?? this.profileMobnum,
+      createdOn: createdOn ?? this.createdOn,
+      addressEmail: addressEmail ?? this.addressEmail,
+      isActive: isActive ?? this.isActive,
+      profileType: profileType ?? this.profileType,
+      isApproved: isApproved ?? this.isApproved,
+      addressId: addressId ?? this.addressId,
     );
   }
 
@@ -840,6 +1129,42 @@ class ProfileTablesCompanion extends UpdateCompanion<ProfileTable> {
     if (postalCode.present) {
       map['postal_code'] = Variable<int>(postalCode.value);
     }
+    if (profileName.present) {
+      map['profile_name'] = Variable<String>(profileName.value);
+    }
+    if (modifiedOn.present) {
+      map['modified_on'] = Variable<String>(modifiedOn.value);
+    }
+    if (modifiedBy.present) {
+      map['modified_by'] = Variable<String>(modifiedBy.value);
+    }
+    if (role.present) {
+      map['role'] = Variable<String>(role.value);
+    }
+    if (profileEmail.present) {
+      map['profile_email'] = Variable<String>(profileEmail.value);
+    }
+    if (profileMobnum.present) {
+      map['profile_mobnum'] = Variable<String>(profileMobnum.value);
+    }
+    if (createdOn.present) {
+      map['created_on'] = Variable<String>(createdOn.value);
+    }
+    if (addressEmail.present) {
+      map['address_email'] = Variable<String>(addressEmail.value);
+    }
+    if (isActive.present) {
+      map['is_active'] = Variable<int>(isActive.value);
+    }
+    if (profileType.present) {
+      map['profile_type'] = Variable<int>(profileType.value);
+    }
+    if (isApproved.present) {
+      map['is_approved'] = Variable<int>(isApproved.value);
+    }
+    if (addressId.present) {
+      map['address_id'] = Variable<int>(addressId.value);
+    }
     return map;
   }
 
@@ -863,7 +1188,19 @@ class ProfileTablesCompanion extends UpdateCompanion<ProfileTable> {
           ..write('landmark: $landmark, ')
           ..write('city: $city, ')
           ..write('state: $state, ')
-          ..write('postalCode: $postalCode')
+          ..write('postalCode: $postalCode, ')
+          ..write('profileName: $profileName, ')
+          ..write('modifiedOn: $modifiedOn, ')
+          ..write('modifiedBy: $modifiedBy, ')
+          ..write('role: $role, ')
+          ..write('profileEmail: $profileEmail, ')
+          ..write('profileMobnum: $profileMobnum, ')
+          ..write('createdOn: $createdOn, ')
+          ..write('addressEmail: $addressEmail, ')
+          ..write('isActive: $isActive, ')
+          ..write('profileType: $profileType, ')
+          ..write('isApproved: $isApproved, ')
+          ..write('addressId: $addressId')
           ..write(')'))
         .toString();
   }
@@ -1106,6 +1443,160 @@ class $ProfileTablesTable extends ProfileTables
     );
   }
 
+  final VerificationMeta _profileNameMeta =
+      const VerificationMeta('profileName');
+  GeneratedTextColumn _profileName;
+  @override
+  GeneratedTextColumn get profileName =>
+      _profileName ??= _constructProfileName();
+  GeneratedTextColumn _constructProfileName() {
+    return GeneratedTextColumn(
+      'profile_name',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _modifiedOnMeta = const VerificationMeta('modifiedOn');
+  GeneratedTextColumn _modifiedOn;
+  @override
+  GeneratedTextColumn get modifiedOn => _modifiedOn ??= _constructModifiedOn();
+  GeneratedTextColumn _constructModifiedOn() {
+    return GeneratedTextColumn(
+      'modified_on',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _modifiedByMeta = const VerificationMeta('modifiedBy');
+  GeneratedTextColumn _modifiedBy;
+  @override
+  GeneratedTextColumn get modifiedBy => _modifiedBy ??= _constructModifiedBy();
+  GeneratedTextColumn _constructModifiedBy() {
+    return GeneratedTextColumn(
+      'modified_by',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _roleMeta = const VerificationMeta('role');
+  GeneratedTextColumn _role;
+  @override
+  GeneratedTextColumn get role => _role ??= _constructRole();
+  GeneratedTextColumn _constructRole() {
+    return GeneratedTextColumn(
+      'role',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _profileEmailMeta =
+      const VerificationMeta('profileEmail');
+  GeneratedTextColumn _profileEmail;
+  @override
+  GeneratedTextColumn get profileEmail =>
+      _profileEmail ??= _constructProfileEmail();
+  GeneratedTextColumn _constructProfileEmail() {
+    return GeneratedTextColumn(
+      'profile_email',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _profileMobnumMeta =
+      const VerificationMeta('profileMobnum');
+  GeneratedTextColumn _profileMobnum;
+  @override
+  GeneratedTextColumn get profileMobnum =>
+      _profileMobnum ??= _constructProfileMobnum();
+  GeneratedTextColumn _constructProfileMobnum() {
+    return GeneratedTextColumn(
+      'profile_mobnum',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _createdOnMeta = const VerificationMeta('createdOn');
+  GeneratedTextColumn _createdOn;
+  @override
+  GeneratedTextColumn get createdOn => _createdOn ??= _constructCreatedOn();
+  GeneratedTextColumn _constructCreatedOn() {
+    return GeneratedTextColumn(
+      'created_on',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _addressEmailMeta =
+      const VerificationMeta('addressEmail');
+  GeneratedTextColumn _addressEmail;
+  @override
+  GeneratedTextColumn get addressEmail =>
+      _addressEmail ??= _constructAddressEmail();
+  GeneratedTextColumn _constructAddressEmail() {
+    return GeneratedTextColumn(
+      'address_email',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _isActiveMeta = const VerificationMeta('isActive');
+  GeneratedIntColumn _isActive;
+  @override
+  GeneratedIntColumn get isActive => _isActive ??= _constructIsActive();
+  GeneratedIntColumn _constructIsActive() {
+    return GeneratedIntColumn(
+      'is_active',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _profileTypeMeta =
+      const VerificationMeta('profileType');
+  GeneratedIntColumn _profileType;
+  @override
+  GeneratedIntColumn get profileType =>
+      _profileType ??= _constructProfileType();
+  GeneratedIntColumn _constructProfileType() {
+    return GeneratedIntColumn(
+      'profile_type',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _isApprovedMeta = const VerificationMeta('isApproved');
+  GeneratedIntColumn _isApproved;
+  @override
+  GeneratedIntColumn get isApproved => _isApproved ??= _constructIsApproved();
+  GeneratedIntColumn _constructIsApproved() {
+    return GeneratedIntColumn(
+      'is_approved',
+      $tableName,
+      false,
+    );
+  }
+
+  final VerificationMeta _addressIdMeta = const VerificationMeta('addressId');
+  GeneratedIntColumn _addressId;
+  @override
+  GeneratedIntColumn get addressId => _addressId ??= _constructAddressId();
+  GeneratedIntColumn _constructAddressId() {
+    return GeneratedIntColumn(
+      'address_id',
+      $tableName,
+      false,
+    );
+  }
+
   @override
   List<GeneratedColumn> get $columns => [
         motherName,
@@ -1125,7 +1616,19 @@ class $ProfileTablesTable extends ProfileTables
         landmark,
         city,
         state,
-        postalCode
+        postalCode,
+        profileName,
+        modifiedOn,
+        modifiedBy,
+        role,
+        profileEmail,
+        profileMobnum,
+        createdOn,
+        addressEmail,
+        isActive,
+        profileType,
+        isApproved,
+        addressId
       ];
   @override
   $ProfileTablesTable get asDslTable => this;
@@ -1269,6 +1772,94 @@ class $ProfileTablesTable extends ProfileTables
               data['postal_code'], _postalCodeMeta));
     } else if (isInserting) {
       context.missing(_postalCodeMeta);
+    }
+    if (data.containsKey('profile_name')) {
+      context.handle(
+          _profileNameMeta,
+          profileName.isAcceptableOrUnknown(
+              data['profile_name'], _profileNameMeta));
+    } else if (isInserting) {
+      context.missing(_profileNameMeta);
+    }
+    if (data.containsKey('modified_on')) {
+      context.handle(
+          _modifiedOnMeta,
+          modifiedOn.isAcceptableOrUnknown(
+              data['modified_on'], _modifiedOnMeta));
+    } else if (isInserting) {
+      context.missing(_modifiedOnMeta);
+    }
+    if (data.containsKey('modified_by')) {
+      context.handle(
+          _modifiedByMeta,
+          modifiedBy.isAcceptableOrUnknown(
+              data['modified_by'], _modifiedByMeta));
+    } else if (isInserting) {
+      context.missing(_modifiedByMeta);
+    }
+    if (data.containsKey('role')) {
+      context.handle(
+          _roleMeta, role.isAcceptableOrUnknown(data['role'], _roleMeta));
+    } else if (isInserting) {
+      context.missing(_roleMeta);
+    }
+    if (data.containsKey('profile_email')) {
+      context.handle(
+          _profileEmailMeta,
+          profileEmail.isAcceptableOrUnknown(
+              data['profile_email'], _profileEmailMeta));
+    } else if (isInserting) {
+      context.missing(_profileEmailMeta);
+    }
+    if (data.containsKey('profile_mobnum')) {
+      context.handle(
+          _profileMobnumMeta,
+          profileMobnum.isAcceptableOrUnknown(
+              data['profile_mobnum'], _profileMobnumMeta));
+    } else if (isInserting) {
+      context.missing(_profileMobnumMeta);
+    }
+    if (data.containsKey('created_on')) {
+      context.handle(_createdOnMeta,
+          createdOn.isAcceptableOrUnknown(data['created_on'], _createdOnMeta));
+    } else if (isInserting) {
+      context.missing(_createdOnMeta);
+    }
+    if (data.containsKey('address_email')) {
+      context.handle(
+          _addressEmailMeta,
+          addressEmail.isAcceptableOrUnknown(
+              data['address_email'], _addressEmailMeta));
+    } else if (isInserting) {
+      context.missing(_addressEmailMeta);
+    }
+    if (data.containsKey('is_active')) {
+      context.handle(_isActiveMeta,
+          isActive.isAcceptableOrUnknown(data['is_active'], _isActiveMeta));
+    } else if (isInserting) {
+      context.missing(_isActiveMeta);
+    }
+    if (data.containsKey('profile_type')) {
+      context.handle(
+          _profileTypeMeta,
+          profileType.isAcceptableOrUnknown(
+              data['profile_type'], _profileTypeMeta));
+    } else if (isInserting) {
+      context.missing(_profileTypeMeta);
+    }
+    if (data.containsKey('is_approved')) {
+      context.handle(
+          _isApprovedMeta,
+          isApproved.isAcceptableOrUnknown(
+              data['is_approved'], _isApprovedMeta));
+    } else if (isInserting) {
+      context.missing(_isApprovedMeta);
+    }
+    if (data.containsKey('address_id')) {
+      context.handle(_addressIdMeta,
+          addressId.isAcceptableOrUnknown(data['address_id'], _addressIdMeta));
+    } else if (isInserting) {
+      context.missing(_addressIdMeta);
     }
     return context;
   }

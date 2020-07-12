@@ -20,6 +20,19 @@ class ProfileTables extends Table {
   TextColumn get state => text()();
   IntColumn get postalCode => integer()();
 
+  TextColumn get profileName => text()();
+  TextColumn get modifiedOn => text()();
+  TextColumn get modifiedBy => text()();
+  TextColumn get role => text()();
+  TextColumn get profileEmail => text()();
+  TextColumn get profileMobnum => text()();
+  TextColumn get createdOn => text()();
+  TextColumn get addressEmail => text()();
+  IntColumn get isActive => integer()();
+  IntColumn get profileType => integer()();
+  IntColumn get isApproved => integer()();
+  IntColumn get addressId => integer()();
+
   @override
   Set<Column> get primaryKey => {recoveryEmail};
 }
