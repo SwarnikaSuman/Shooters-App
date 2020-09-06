@@ -52,6 +52,9 @@ class ProfileServices {
       'State': State,
       'Postalcode': PostalCode,
     };
+    body.removeWhere((k, v) => v == null);
+
+
     Response response = await _customNetworkClient.POST(
       url: '/users/addprofile',
       body: jsonEncode(body),

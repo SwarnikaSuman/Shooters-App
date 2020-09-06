@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shooting_app/Model/profile/profileServices.dart';
 
 class FirstLoginController extends ChangeNotifier {
@@ -29,6 +32,9 @@ class FirstLoginController extends ChangeNotifier {
 
   String createdBy = "";
 
+  // For displaying image in the image widget
+  File image = null;
+
   final _profileServices = ProfileServices();
 
   Future updateProfile() async {
@@ -55,6 +61,11 @@ class FirstLoginController extends ChangeNotifier {
           PostalCode: Postalcode);
       await _profileServices.addProfiletoDatabase();
     } catch (e) {}
+  }
+
+  void setProfilePhoto(PickedFile pickedImage) {
+    image = File(pickedImage.path);
+    notifyListeners();
   }
 
   void validateEmail() {}

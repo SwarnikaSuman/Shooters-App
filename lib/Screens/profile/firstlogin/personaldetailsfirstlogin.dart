@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -16,7 +17,8 @@ class FirstLogin extends StatelessWidget {
   Future<String> getImageinBase64(bool camera) async {
     final image = await picker.getImage(
         source: camera ? ImageSource.camera : ImageSource.gallery);
-    final bytes = await image.readAsBytes();
+    final bytes = await File(image.path).readAsBytes();
+    _firstLoginController.setProfilePhoto(image);
     return base64Encode(bytes);
   }
 
@@ -26,7 +28,22 @@ class FirstLogin extends StatelessWidget {
     _firstLoginController.profileName = profileName;
 
     return Scaffold(
-      body: Builder(builder: (BuildContext context) => Container()),
+      body: Builder(
+          builder: (BuildContext context) => ListView(
+                children: <Widget>[
+                  Row(children: [
+                    Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Container(
+                            child: Image.file(_firstLoginController.image),
+                            height: 100,
+                            width: 100)),
+                    Column(
+                      children: <Widget>[],
+                    )
+                  ]),
+                ],
+              )),
     );
   }
 }
