@@ -1,6 +1,6 @@
 import 'package:moor_flutter/moor_flutter.dart';
 import 'package:shooting_app/Model/database/moor_database.dart';
-import 'package:shooting_app/Model/model_profile/profile_table.dart';
+import 'package:shooting_app/Model/profile/profile_table.dart';
 
 part 'profile_dao.g.dart';
 

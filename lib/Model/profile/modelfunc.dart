@@ -5,8 +5,8 @@ import 'package:http/http.dart';
 import 'package:shooting_app/Model/base/CustomNetworkCliet.dart';
 import 'package:shooting_app/Model/base/ExceptionClasses.dart';
 import 'package:shooting_app/Model/database/moor_database.dart';
-import 'package:shooting_app/Model/model_profile/getProfile_model.dart';
-import 'package:shooting_app/Model/model_profile/profile_dao.dart';
+import 'package:shooting_app/Model/profile/getProfile_model.dart';
+import 'package:shooting_app/Model/profile/profile_dao.dart';
 
 class ManageProfile {
   final CustomNetworkClient _customNetworkClient = CustomNetworkClient();
