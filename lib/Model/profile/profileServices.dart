@@ -8,7 +8,7 @@ import 'package:shooting_app/Model/database/moor_database.dart';
 import 'package:shooting_app/Model/profile/local/profile_dao.dart';
 import 'package:shooting_app/Model/profile/profilejson_converter.dart';
 
-class ManageProfile {
+class ProfileServices {
   final CustomNetworkClient _customNetworkClient = CustomNetworkClient();
   final ProfileDao _profileDao = AppDatabase().profileDao;
 
@@ -26,12 +26,12 @@ class ManageProfile {
     @required String secondaryMobnum,
     @required String organization,
     @required String createdBy,
-    @required int houseNo,
-    @required String locality,
-    @required String landmark,
-    @required String city,
-    @required String state,
-    @required int postalCode,
+    @required String houseNo,
+    @required String Locality,
+    @required String Landmark,
+    @required String City,
+    @required String State,
+    @required String PostalCode,
   }) async {
     Map<String, dynamic> body = {
       'motherName': motherName,
@@ -47,11 +47,11 @@ class ManageProfile {
       'organization': organization,
       'createdBy': createdBy,
       'houseNo': houseNo,
-      'Locality': locality,
-      'Landmark': landmark,
-      'City': city,
-      'State': state,
-      'Postalcode': postalCode,
+      'Locality': Locality,
+      'Landmark': Landmark,
+      'City': City,
+      'State': State,
+      'Postalcode': PostalCode,
     };
     Response response = await _customNetworkClient.POST(
       url: '/users/addprofile',

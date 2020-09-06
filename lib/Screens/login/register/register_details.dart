@@ -133,12 +133,13 @@ class RegisterDetails extends StatelessWidget {
                                 String error =
                                     await registerController.register();
                                 if (error == "") {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => FirstLogin(),
-                                    ),
-                                  );
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            FirstLogin(registerController.name),
+                                      ),
+                                      (d) => true);
                                 } else {
                                   Scaffold.of(context).showSnackBar(SnackBar(
                                       content: Text("$error",
