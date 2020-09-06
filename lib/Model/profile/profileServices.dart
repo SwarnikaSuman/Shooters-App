@@ -5,14 +5,15 @@ import 'package:http/http.dart';
 import 'package:shooting_app/Model/base/CustomNetworkCliet.dart';
 import 'package:shooting_app/Model/base/ExceptionClasses.dart';
 import 'package:shooting_app/Model/database/moor_database.dart';
-import 'package:shooting_app/Model/profile/getProfile_model.dart';
-import 'package:shooting_app/Model/profile/profile_dao.dart';
+import 'package:shooting_app/Model/profile/local/profile_dao.dart';
+import 'package:shooting_app/Model/profile/profilejson_converter.dart';
 
 class ManageProfile {
   final CustomNetworkClient _customNetworkClient = CustomNetworkClient();
-  ProfileDao profileDao;
+  final ProfileDao _profileDao = AppDatabase().profileDao;
 
-  Future<bool> updateProfile({
+  Future<void> updateProfile({
+    @required String profileName,
     @required String motherName,
     @required String fatherName,
     @required String profilePhoto,
@@ -57,11 +58,10 @@ class ManageProfile {
       body: jsonEncode(body),
     );
     if (response.statusCode == 200) {
-      Map<String, String> registerObject = jsonDecode(response.body);
-      if (registerObject['message'] == "success") {
-        return true;
+      Map<String, String> profileObject = jsonDecode(response.body);
+      if (profileObject['message'] != "success") {
+        throw NotSuccessException(profileObject['message']);
       }
-      return false;
     } else {
       throw HttpException(response.statusCode);
     }
@@ -108,7 +108,13 @@ class ManageProfile {
         secondaryMobnum: profile.secondaryMobnum,
         state: profile.state,
       );
-      profileDao.insertProfile(profileData);
+      await _profileDao.insertProfile(profileData);
+    } else {
+      throw HttpException(response.statusCode);
     }
+  }
+
+  Stream<ProfileTable> observeProfile() {
+    return _profileDao.userProfile;
   }
 }

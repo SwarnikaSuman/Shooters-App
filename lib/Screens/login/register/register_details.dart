@@ -5,14 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shooting_app/Screens/login/login_screen/login_screen.dart';
 import 'package:shooting_app/Screens/login/register/register_controller.dart';
-import 'package:shooting_app/screens/profile/profile_controller.dart';
-import 'package:shooting_app/screens/profile/profilepage.dart';
+import 'package:shooting_app/Screens/profile/firstlogin/personaldetailsfirstlogin.dart';
 
 class RegisterDetails extends StatelessWidget {
   RegisterDetails({@required this.registerController});
 
   RegisterController registerController;
-  ProfileController profileController = ProfileController();
   String rangeName = "";
   String userMob = "";
 
@@ -138,8 +136,7 @@ class RegisterDetails extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          DecideWhichProfile("initStatus"),
+                                      builder: (context) => FirstLogin(),
                                     ),
                                   );
                                 } else {

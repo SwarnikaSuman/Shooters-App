@@ -75,6 +75,12 @@ class RegisterController extends ChangeNotifier {
         case SocketException:
           error = "No Internet Connection";
           break;
+        case NotSuccessException:
+          error = e.message;
+          break;
+        default:
+          error = "Something went wrong";
+          break;
       }
     } finally {
       isLoading = false;

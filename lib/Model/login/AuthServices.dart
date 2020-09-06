@@ -49,12 +49,12 @@ class AuthServices{
   /// Returns true if user registers successfully
   /// Returns false if user email is already registered
   /// Throws HttpException if response code is other than 200
-  Future<bool> register({
-    @required String userName,
-    @required String userEmail,
-    @required String userPassword,
-    @required String userMobnum,
-    @required int userType}) async {
+  Future<void> register(
+      {@required String userName,
+      @required String userEmail,
+      @required String userPassword,
+      @required String userMobnum,
+      @required int userType}) async {
     Map<String, dynamic> body = {
       'userName': userName,
       'userEmail': userEmail,
@@ -66,10 +66,9 @@ class AuthServices{
         url: '/users/register', body: jsonEncode(body));
     if (response.statusCode == 200) {
       Map<String, String> registerObject = jsonDecode(response.body);
-      if (registerObject['message'] == "success") {
-        return true;
-        }
-      return false;
+      if (registerObject['message'] != "success") {
+        throw NotSuccessException(registerObject['message']);
+      }
     } else {
       throw HttpException(response.statusCode);
     }

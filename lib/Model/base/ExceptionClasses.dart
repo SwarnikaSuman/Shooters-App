@@ -7,14 +7,21 @@ class DeleteException implements Exception {
 }
 
 class ReadException implements Exception {
-  String cause="Unable to read data";
+  String cause = "Unable to read data";
 }
 
 class HttpException implements Exception {
   int errorCode;
+
   HttpException(this.errorCode);
 }
 
-class InvalidCredentials implements Exception{
-  String cause="Email does not exits";
+class NotSuccessException implements Exception {
+  String message;
+
+  NotSuccessException(message);
+}
+
+class InvalidCredentials implements Exception {
+  String cause = "Email does not exits";
 }
