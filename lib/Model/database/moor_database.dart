@@ -1,15 +1,17 @@
 import 'package:moor_flutter/moor_flutter.dart';
 import 'package:shooting_app/Model/login/local/userlog_dao.dart';
 import 'package:shooting_app/Model/login/local/userlog_table.dart';
-import 'package:shooting_app/Model/model_profile/profile_table.dart';
+import 'package:shooting_app/Model/profile/profile_dao.dart';
+import 'package:shooting_app/Model/profile/profile_table.dart';
 
 part 'moor_database.g.dart';
 
-@UseMoor(tables: [UserLogTables, ProfileTables], daos: [UserLogDao])
+@UseMoor(tables: [UserLogTables, ProfileTables], daos: [UserLogDao, ProfileDao])
 class AppDatabase extends _$AppDatabase {
   // Singleton Pattern
-  AppDatabase._internal() : super(FlutterQueryExecutor.inDatabaseFolder(
-      path: 'db.sqlite', logStatements: true));
+  AppDatabase._internal()
+      : super(FlutterQueryExecutor.inDatabaseFolder(
+            path: 'db.sqlite', logStatements: true));
   static final _instance = AppDatabase._internal();
 
   factory AppDatabase() => _instance;
