@@ -4,24 +4,30 @@ import 'package:shooting_app/Model/profile/profileServices.dart';
 class FirstLoginController extends ChangeNotifier {
   String profileName = "";
 
-  String motherName = "";
-  String fatherName = "";
+  //Personal
   String profilePhoto = "";
   String profileGender = "";
   String profileDob = "";
+  String motherName = "";
+  String fatherName = "";
   String profileNationality = "";
   String profileOccupation = "";
-  String profileQual = "";
-  String recoveryEmail = "";
-  String secondaryMobnum = "";
   String organization = "";
-  String createdBy = "";
+  String profileQual = "";
+
+  //Address
   String houseNo = "";
   String Locality = "";
   String Landmark = "";
   String City = "";
   String State = "";
   String Postalcode = "";
+
+  // Contact
+  String recoveryEmail = "";
+  String secondaryMobnum = "";
+
+  String createdBy = "";
 
   final _profileServices = ProfileServices();
 

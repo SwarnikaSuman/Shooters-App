@@ -30,6 +30,7 @@ dependencies:
   provider: ^3.0.0
   moor_flutter: ^3.0.0
   moor: ^3.2.0
+  image_picker: ^0.6.7+7
 
 dev_dependencies:
   flutter_test:

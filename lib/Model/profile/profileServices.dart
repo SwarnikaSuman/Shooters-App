@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shooting_app/Model/base/CustomNetworkCliet.dart';
 import 'package:shooting_app/Model/base/ExceptionClasses.dart';
@@ -13,25 +12,25 @@ class ProfileServices {
   final ProfileDao _profileDao = AppDatabase().profileDao;
 
   Future<void> updateProfile({
-    @required String profileName,
-    @required String motherName,
-    @required String fatherName,
-    @required String profilePhoto,
-    @required String profileGender,
-    @required String profileDob,
-    @required String profileNationality,
-    @required String profileOccupation,
-    @required String profileQual,
-    @required String recoveryEmail,
-    @required String secondaryMobnum,
-    @required String organization,
-    @required String createdBy,
-    @required String houseNo,
-    @required String Locality,
-    @required String Landmark,
-    @required String City,
-    @required String State,
-    @required String PostalCode,
+    String profileName,
+    String motherName,
+    String fatherName,
+    String profilePhoto,
+    String profileGender,
+    String profileDob,
+    String profileNationality,
+    String profileOccupation,
+    String profileQual,
+    String recoveryEmail,
+    String secondaryMobnum,
+    String organization,
+    String createdBy,
+    String houseNo,
+    String Locality,
+    String Landmark,
+    String City,
+    String State,
+    String PostalCode,
   }) async {
     Map<String, dynamic> body = {
       'motherName': motherName,
