@@ -11,6 +11,7 @@ class ProfileDisplayOnly extends StatelessWidget {
         builder: (BuildContext context) =>
             ListView(
               children: <Widget>[
+                SizedBox(height:20),
                 Text("Hello "),
                 InputText(onChanged: (_) {},
                     labelText: "Hello"
